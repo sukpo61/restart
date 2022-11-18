@@ -7,20 +7,30 @@
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
-        apiKey: "AIzaSyDuM8KXkh0ASlpvM_xIryV7YuB7gXdZXM4",
-        authDomain: "test-a6f5c.firebaseapp.com",
-        projectId: "test-a6f5c",
-        storageBucket: "test-a6f5c.appspot.com",
-        messagingSenderId: "546247560866",
-        appId: "1:546247560866:web:936539458a41f27cbb51fb",
-        measurementId: "G-MXKS43J261"
+        // apiKey: "AIzaSyDuM8KXkh0ASlpvM_xIryV7YuB7gXdZXM4",
+        // authDomain: "test-a6f5c.firebaseapp.com",
+        // projectId: "test-a6f5c",
+        // storageBucket: "test-a6f5c.appspot.com",
+        // messagingSenderId: "546247560866",
+        // appId: "1:546247560866:web:936539458a41f27cbb51fb",
+        // measurementId: "G-MXKS43J261"
+
+      apiKey: "AIzaSyCPhO8U7uC9EQesZiUUBidqbmGhQgn242o",
+      authDomain: "poject-6355d.firebaseapp.com",
+      projectId: "poject-6355d",
+      storageBucket: "poject-6355d.appspot.com",
+      messagingSenderId: "65734710701",
+      appId: "1:65734710701:web:d36bc135a6f895867d7d24",
+      measurementId: "G-ELGHVE40M3"
     };
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    const provider = new GoogleAuthProvider();
+    const provider1 = new GithubAuthProvider();
 
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 
     const auth = getAuth();
 
@@ -236,6 +246,63 @@
 
     }
 
+
+    function GoogleLogin(){
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          console.log(result)
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          console.log(error)
+          // ...
+        });
+
+    }
+
+
+    function GitHubLogin(){
+        signInWithPopup(auth, provider1)
+        .then((result) => {
+          alert('깃허브 로그인 성공');
+          var link = 'https://www.google.com/';
+          location.href = link;
+          location.replace(link);
+          window.open(link);
+          // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+          const credential = GithubAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+
+          // The signed-in user info.
+          const user = result.user;
+          // ...
+        }).catch((error) => {
+          alert('로그인실패')
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // The email of the user's account used.
+          const email = error.customData.email;
+          // The AuthCredential type that was used.
+          const credential = GithubAuthProvider.credentialFromError(error);
+          // ...
+        });
+    }
+
+    window.GitHubLogin = GitHubLogin
+
+    window.GoogleLogin = GoogleLogin
 
     window.LoginFunction = LoginFunction
 

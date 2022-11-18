@@ -56,10 +56,10 @@ const route = (event) => {
 
 const routes = {
   404: "/pages/404.html",
-  "/": "/pages/index.html",
+  "/": "/pages/login.html",
   about: "/pages/about.html",
   lorem: "/pages/lorem.html",
-  create_step1 : "/pages/create_step1.html"
+  create : "/pages/create.html"
 };
 
 const handleLocation = async () => {

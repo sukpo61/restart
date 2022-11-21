@@ -227,8 +227,8 @@
             createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
                 .then((userCredential) => {
                     console.log(userCredential)
-                    let link = 'https://www.naver.com/'
-                    location.href = link;
+                    window.location.hash = "#main";
+
                     // Signed in
                     const user = userCredential.user;
                     // ...
@@ -253,7 +253,7 @@
           // This gives you a Google Access Token. You can use it to access the Google API.
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
-          // The signed-in user info.
+            window.location.hash = "#main";
           const user = result.user;
           console.log(result)
           // ...
@@ -276,10 +276,8 @@
         signInWithPopup(auth, provider1)
         .then((result) => {
           alert('깃허브 로그인 성공');
-          var link = 'https://www.google.com/';
-          location.href = link;
-          location.replace(link);
-          window.open(link);
+          window.location.hash = "#main";
+
           // This gives you a GitHub Access Token. You can use it to access the GitHub API.
           const credential = GithubAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;

@@ -100,29 +100,101 @@ export const getCommentList = async () => {
   commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
     const isOwner = currentUid === cmtObj.creatorId;
-    const temp_html = `<div class="card commentCard">
-          <div class="card-body">
-              <blockquote class="blockquote mb-0">
-                  <p class="commentText">${cmtObj.text}</p>
-                  <p id="${
-                    cmtObj.id
-                  }" class="noDisplay"><input class="newCmtInput" type="text" maxlength="30" /><button class="updateBtn" onclick="update_comment(event)">완료</button></p>
-                  <footer class="quote-footer"><div>BY&nbsp;&nbsp;<img class="cmtImg" width="50px" height="50px" src="${
-                    cmtObj.profileImg
-                  }" alt="profileImg" /><span>${
-      cmtObj.nickname ?? "닉네임 없음"
-    }</span></div><div class="cmtAt">${new Date(cmtObj.createdAt)
-      .toString()
-      .slice(0, 25)}</div></footer>
-              </blockquote>
-              <div class="${isOwner ? "updateBtns" : "noDisplay"}">
-                   <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
-                <button name="${
-                  cmtObj.id
-                }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
-              </div>            
+    const temp_html = `
+                <div class="friends_post">
+
+                <div class="friend_post_top">
+
+                    <div class="img_and_name">
+
+                        <img src="${
+         cmtObj.profileImg
+               }">
+
+                        <div class="friends_name">
+                            <div class="name_and_time">
+                                <span class="friends_name">
+                                ${
+        cmtObj.nickname ?? "닉네임 없음"
+    }
+                            </span>
+                            <span class="time">${new Date(cmtObj.createdAt)
+        .toString()
+        .slice(0, 25)}</span>
+                            </div>
+                            <div><span>${cmtObj.text}</span></div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="menu">
+
+                        <i class="fa-solid fa-ellipsis"></i>
+
+                    </div>
+
+                </div>
+
+
+
+                <img src="image/post_1.jpg">
+
+                <div class="info">
+
+                    <div class="emoji_img">
+                        <img src="image/like.png">
+
+                        <p>You, Charith Disanayaka and 25K others</p>
+                    </div>
+
+                    <div class="comment">
+                        <p>421 Comments</p>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="like">
+
+                    <div class="like_icon">
+                        <i class="fa-solid fa-thumbs-up activi"></i>
+                        <p>Like</p>
+                    </div>
+
+                    <div class="like_icon">
+                        <i class="fa-solid fa-message"></i>
+                        <p>Comments</p>
+                    </div>
+
+
+
+                </div>
+
+                <hr>
+
+                <div class="comment_warpper">
+
+                    <img src="image/profile.png">
+                    <div class="circle"></div>
+
+                    <div class="comment_search">
+
+                        <input type="text" placeholder="Write a comment">
+                        <i class="fa-regular fa-face-smile"></i>
+                        <i class="fa-solid fa-camera"></i>
+                        <i class="fa-regular fa-note-sticky"></i>
+
+                    </div>
+
+                </div>
+
             </div>
-     </div>`;
+
+`;
     const div = document.createElement("div");
     div.classList.add("mycards");
     div.innerHTML = temp_html;

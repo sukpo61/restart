@@ -12,6 +12,8 @@ const firebaseConfig = {
   storageBucket: "privatefanbook.appspot.com",
   messagingSenderId: "691166733828",
   appId: "1:691166733828:web:7fb27f2b27fb95304fb751",
+
+
 };
 
 // Initialize Firebase
@@ -19,3 +21,33 @@ export const app = initializeApp(firebaseConfig);
 export const dbService = getFirestore(app);
 export const authService = getAuth(app);
 export const storageService = getStorage(app);
+
+
+//
+// 내 코드
+// apiKey: "AIzaSyDuM8KXkh0ASlpvM_xIryV7YuB7gXdZXM4",
+//   authDomain: "test-a6f5c.firebaseapp.com",
+//   projectId: "test-a6f5c",
+//   storageBucket: "test-a6f5c.appspot.com",
+//   messagingSenderId: "546247560866",
+//   appId: "1:546247560866:web:936539458a41f27cbb51fb",
+//   measurementId: "G-MXKS43J261"
+
+
+
+
+  // 상현님 코드
+  // apiKey: "AIzaSyBLC85NBtPaLOoWyBoSKwexacA6bC4qZX0",
+  // authDomain: "privatefanbook.firebaseapp.com",
+  // projectId: "privatefanbook",
+  // storageBucket: "privatefanbook.appspot.com",
+  // messagingSenderId: "691166733828",
+  // appId: "1:691166733828:web:7fb27f2b27fb95304fb751",
+//
+// 튜터님 코드
+//   apiKey: "AIzaSyBLC85NBtPaLOoWyBoSKwexacA6bC4qZX0",
+//   authDomain: "privatefanbook.firebaseapp.com",
+//   projectId: "privatefanbook",
+//   storageBucket: "privatefanbook.appspot.com",
+//   messagingSenderId: "691166733828",
+//   appId: "1:691166733828:web:7fb27f2b27fb95304fb751",

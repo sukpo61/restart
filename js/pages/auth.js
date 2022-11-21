@@ -118,6 +118,10 @@ export const socialLogin = (event) => {
     });
 };
 
+
+
+
+
 export const logout = () => {
   signOut(authService)
     .then(() => {

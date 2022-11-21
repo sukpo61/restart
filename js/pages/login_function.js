@@ -1,59 +1,20 @@
 // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        // apiKey: "AIzaSyDuM8KXkh0ASlpvM_xIryV7YuB7gXdZXM4",
-        // authDomain: "test-a6f5c.firebaseapp.com",
-        // projectId: "test-a6f5c",
-        // storageBucket: "test-a6f5c.appspot.com",
-        // messagingSenderId: "546247560866",
-        // appId: "1:546247560866:web:936539458a41f27cbb51fb",
-        // measurementId: "G-MXKS43J261"
+import { authService } from "../firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  GithubAuthProvider,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 
-      apiKey: "AIzaSyCPhO8U7uC9EQesZiUUBidqbmGhQgn242o",
-      authDomain: "poject-6355d.firebaseapp.com",
-      projectId: "poject-6355d",
-      storageBucket: "poject-6355d.appspot.com",
-      messagingSenderId: "65734710701",
-      appId: "1:65734710701:web:d36bc135a6f895867d7d24",
-      measurementId: "G-ELGHVE40M3"
-    };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
     const provider = new GoogleAuthProvider();
     const provider1 = new GithubAuthProvider();
 
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 
-    const auth = getAuth();
-
-    // document.getElementById('signUpButton').addEventListener('click', (event) => {
-    //     event.preventDefault()
-    //     const signUpEmail = document.getElementById('signUpEmail').value
-    //     const signUpPassword = document.getElementById('signUpPassword').value
-    //
-    //     createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-    //         .then((userCredential) => {
-    //             console.log(userCredential)
-    //             // Signed in
-    //             const user = userCredential.user;
-    //             // ...
-    //         })
-    //         .catch((error) => {
-    //             console.log('error')
-    //             const errorCode = error.code;
-    //             const errorMessage = error.message;
-    //             // ..
-    //         });
-    //
-    // })
 
     function CheckEmail(str) {
 
@@ -153,13 +114,12 @@
 
             return;
         } else {
-            signInWithEmailAndPassword(auth, signInEmail, signInPassword)
+            signInWithEmailAndPassword(authService, signInEmail, signInPassword)
                 .then((userCredential) => {
                     // Signed in
                     console.log(userCredential)
                     const user = userCredential.user;
-                    let link = 'https://www.naver.com/'
-                    location.href = link;
+                    window.location.hash = "#main";
                     // ...
                 })
                 .catch((error) => {
@@ -224,7 +184,7 @@
             signInPassword_input.classList.add('red_line');
         } else {
 
-            createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+            createUserWithEmailAndPassword(authService, signUpEmail, signUpPassword)
                 .then((userCredential) => {
                     console.log(userCredential)
                     window.location.hash = "#main";
@@ -248,7 +208,7 @@
 
 
     function GoogleLogin(){
-      signInWithPopup(auth, provider)
+      signInWithPopup(authService, provider)
         .then((result) => {
           // This gives you a Google Access Token. You can use it to access the Google API.
           const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -273,7 +233,7 @@
 
 
     function GitHubLogin(){
-        signInWithPopup(auth, provider1)
+        signInWithPopup(authService, provider1)
         .then((result) => {
           alert('깃허브 로그인 성공');
           window.location.hash = "#main";
@@ -297,6 +257,31 @@
           // ...
         });
     }
+
+    const logout = () => {
+  signOut(authService)
+    .then(() => {
+      // Sign-out successful.
+      localStorage.clear();
+      console.log("로그아웃 성공");
+    })
+    .catch((error) => {
+      // An error happened.
+      console.log("error:", error);
+    });
+};
+
+
+
+    let subMenu = document.getElementById("subMenu");
+
+    function toggleMenu() {
+                    subMenu.classList.add("open_menu");
+                }
+
+
+
+    window.toggleMenu = toggleMenu
 
     window.GitHubLogin = GitHubLogin
 

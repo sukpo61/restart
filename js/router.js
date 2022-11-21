@@ -71,7 +71,7 @@ const handleLocation = async () => {
   const route = routes[path] || routes[404];
   const html = await fetch(route).then((data) => data.text());
 
-  document.getElementById("login_form_lo").innerHTML = html;
+  document.getElementById("root").innerHTML = html;
 
   // $('#login_form_lo').empty()
   // $('#login_form_lo').append(html)

@@ -1,4 +1,4 @@
-// import { authService } from "./firebase.js";
+import { authService } from "./firebase.js";
 //
 // const routes = {
 //   404: "/pages/404.html",
@@ -48,7 +48,6 @@
 //   window.location.hash = "#profile";
 // };
 
-
 const route = (event) => {
   event.preventDefault();
   window.location.hash = event.target.hash;
@@ -59,7 +58,7 @@ const routes = {
   "/": "/pages/login.html",
   about: "/pages/about.html",
   lorem: "/pages/lorem.html",
-  create : "/pages/create.html"
+  create: "/pages/create.html",
 };
 
 const handleLocation = async () => {
@@ -76,8 +75,34 @@ const handleLocation = async () => {
 
   // $('#login_form_lo').empty()
   // $('#login_form_lo').append(html)
-
 };
+
+// 특정 화면 렌더링 되자마자 DOM 조작 처리(export handleLocation 함수 안에 있던 부분)
+if (path === "fanLog") {
+  // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
+  // ... 기존 코드 부분 ... //
+
+  // ↓ 탑바, 프로필 쪽 추가 구현 부분 ↓
+  //탑바 맨우측 현재 계정 프로필 이미지 출력
+  document.getElementById("profileImg2").src =
+    authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+  //드롭다운 메뉴 속 현재 계정 프로필 이미지 출력
+  document.getElementById("profileImg3").src =
+    authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+  //드롭다운 메뉴 속 계정 이메일 출력
+  document.getElementById("account-info").textContent =
+    authService.currentUser.email ?? "계정";
+}
+
+if (path === "profile") {
+  // 프로필 관리 화면 일 때 현재 프로필 사진과 닉네임 할당
+  document.getElementById("profileView").src =
+    authService.currentUser.photoURL ?? "/assets/blankProfile.webp";
+  document.getElementById("profileNickname").placeholder =
+    authService.currentUser.displayName ?? "닉네임 없음";
+}
 
 const GoToLorem = () => {
   window.location.hash = "#lorem";
@@ -89,5 +114,9 @@ window.addEventListener("hashchange", handleLocation);
 // 첫 랜딩 또는 새로고침 시 처리
 document.addEventListener("DOMContentLoaded", handleLocation);
 
-
-
+//프로필 드롭다운 메뉴 토글
+export const toggleMenu = () => {
+  let subMenu = document.getElementById("subMenu");
+  // console.log(authService.currentUser.email);
+  subMenu.classList.toggle("open-menu");
+};

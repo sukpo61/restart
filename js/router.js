@@ -6,9 +6,10 @@ const routes = {
   about: "/pages/about.html",
   lorem: "/pages/lorem.html",
   create : "/pages/create.html",
-  main : "/pages/main.html"
+  main : "/pages/main.html",
+    mypage : "/pages/mypage.html"
 };
-import { getCommentList } from "./pages/fanLog.js";
+import { getCommentList, getCommentList_mypage } from "./pages/fanLog.js";
 
  const handleLocation = async () => {
 
@@ -32,32 +33,41 @@ import { getCommentList } from "./pages/fanLog.js";
          console.log(authService)
          // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
          document.getElementById("nickname").textContent =
-           authService.currentUser.displayName ?? "닉네임 없음";
+             authService.currentUser.displayName ?? "닉네임 없음";
 
-           //탑바 맨우측 현재 계정 프로필 이미지 출력
-              document.getElementById("dropdown_profile").src =
-                authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+         //탑바 맨우측 현재 계정 프로필 이미지 출력
+         document.getElementById("dropdown_profile").src =
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
-              //드롭다운 메뉴 속 현재 계정 프로필 이미지 출력
-              document.getElementById("top_bar_image").src =
-                authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+         //드롭다운 메뉴 속 현재 계정 프로필 이미지 출력
+         document.getElementById("top_bar_image").src =
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
-              //드롭다운 메뉴 속 계정 이메일 출력
-              document.getElementById("dropdown_email").textContent =
-                authService.currentUser.email ?? "계정";
+         document.getElementById("post_top_profile").src =
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
-         // document.getElementById("profileImg").src =
-         //   authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+         //드롭다운 메뉴 속 계정 이메일 출력
+         document.getElementById("dropdown_email").textContent =
+             authService.currentUser.email ?? "계정";
+
+         document.getElementById("profileImg").src =
+           authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
          getCommentList();
      }
-     if (path === "profile") {
-         // 프로필 관리 화면 일 때 현재 프로필 사진과 닉네임 할당
-         document.getElementById("profileView").src =
-             authService.currentUser.photoURL ?? "/assets/blankProfile.webp";
-         document.getElementById("profileNickname").placeholder =
+     if (path === "mypage") {
+         document.getElementById("mypage_nickname").textContent =
              authService.currentUser.displayName ?? "닉네임 없음";
-  }
+
+         document.getElementById("mypage_profile").src =
+           authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+         document.getElementById("mypage_email").textContent =
+             authService.currentUser.email ?? "계정";
+
+
+         getCommentList_mypage()
+     }
 };
 
 export const goToProfile = () => {

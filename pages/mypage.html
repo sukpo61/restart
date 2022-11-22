@@ -1,4 +1,4 @@
-    <div class="main">
+ <div class="main">
 
 
         <!------------center---------------------->
@@ -29,7 +29,7 @@
 
                         <hr>
 
-                        <a href="#mypage" class="sub-menu-link" onclick="route(event)">
+                        <a href="#" class="sub-menu-link">
                             <img src="image/profile.png">
                             <p>Edit profile</p>
                             <span></span>
@@ -47,8 +47,18 @@
 
             <div class="top_box">
 
-                    <img src=" ">
-                    <!-- /* 로고자리. 중앙정렬 해주세요, 로고 말고 다른거 들어가도 괜찮을듯 */ -->
+                <img src="image/user.png" id = "mypage_profile">
+                <div class="my_info">
+                    <p class="email" id="mypage_email">
+                            example@.com
+                    </p>
+                    <p class="name" id="mypage_nickname">
+                            Nickname
+                    </p>
+                </div>
+
+
+
 
             </div>
 
@@ -74,7 +84,7 @@
                         <i class="fa-solid fa-images green"></i>
                         <p>Photo</p>
                     </button>
-                    <button onclick="save_comment(event)" type="button" class="post_icon">
+                    <button onclick="save_comment_mypage(event)" type="button" class="post_icon">
                         <i class="fa-solid fa-images green"></i>
                     </button>
 

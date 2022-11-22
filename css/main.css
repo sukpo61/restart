@@ -17,6 +17,11 @@ p{
     background: #f5f5f5;
 }
 
+.noDisplay {
+  display: none;
+}
+
+
 /* top-bar */
 nav{
     background: rgba(255, 255, 255, 0.75);
@@ -193,15 +198,14 @@ nav{
 
 .main .center .my_post .post_bottom{
     width: 95%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
     margin: 5px auto;
 }
 
 .main .center .my_post .post_bottom .post_icon{
     display: flex;
     align-items: center;
-    margin: 0 auto;
     padding: 7px 40px;
     cursor: pointer;
 }
@@ -275,7 +279,7 @@ nav{
 }
 
 .main .center .friends_post{
-    margin-top: 100px;
+    margin-top: 20px;
 
     width: 100%;
     height: auto;
@@ -310,6 +314,9 @@ nav{
     display: flex;
 }
 
+.img_and_name{
+    width: 80%;
+}
 
 .main .center .friends_post .friend_post_top .img_and_name .friends_name .friends_name{
     font-weight: bold;

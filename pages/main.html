@@ -57,7 +57,10 @@
                 <div class="post_top">
 
                     <img src="image/profile.png">
-                    <input type="text" placeholder="글을 남겨주세요">
+                    <input class="form-control"
+                    placeholder="Leave a comment here"
+                    id="comment"
+                     >
 
                 </div>
 
@@ -65,20 +68,15 @@
 
                 <div class="post_bottom">
 
-                    <div class="post_icon">
-                        <i class="fa-solid fa-video red"></i>
-                        <p>Live video</p>
-                    </div>
 
-                    <div class="post_icon">
+                    <button  class="post_icon">
                         <i class="fa-solid fa-images green"></i>
-                        <p>Photo/video</p>
-                    </div>
+                        <p>Photo</p>
+                    </button>
+                    <button onclick="save_comment(event)" type="button" class="post_icon">
+                        <i class="fa-solid fa-images green"></i>
+                    </button>
 
-                    <div class="post_icon">
-                        <i class="fa-regular fa-face-grin yellow"></i>
-                        <p>Feeling/activity</p>
-                    </div>
 
                 </div>
 

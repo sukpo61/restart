@@ -37,8 +37,8 @@ export const onEditing = (event) => {
   udBtns.forEach((udBtn) => (udBtn.disabled = "true"));
 
   const cardBody = event.target.parentNode.parentNode;
-  const commentText = cardBody.children[0].children[0];
-  const commentInputP = cardBody.children[0].children[1];
+  const commentText = cardBody.children[0].children[1].children[1];
+  const commentInputP = cardBody.children[0].children[1].children[2];
 
   commentText.classList.add("noDisplay");
   commentInputP.classList.add("d-flex");
@@ -123,15 +123,30 @@ export const getCommentList = async () => {
         .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
+                            <p id="${cmtObj.id}" class="noDisplay">
+                                <input class="newCmtInput" type="text">
+                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                            </p>
 
                         </div>
 
 
                     </div>
 
-                    <div class="menu">
-
-                        <i class="fa-solid fa-ellipsis"></i>
+                    <div class=${isOwner ? "menu" : "noDisplay"}>
+                    
+                    <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
+                     <button name="${
+                  cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
+              
+                            
+<!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
+<!--                        edit-->
+<!--                        </span>-->
+<!--                        <span class="material-symbols-outlined deleteBtn" onclick="delete_comment(event)">-->
+<!--                        delete-->
+<!--                        </span>-->
 
                     </div>
 
@@ -201,3 +216,8 @@ export const getCommentList = async () => {
     commnetList.appendChild(div);
   });
 };
+
+window.save_comment = save_comment;
+window.update_comment = update_comment;
+window.onEditing = onEditing;
+window.delete_comment = delete_comment;

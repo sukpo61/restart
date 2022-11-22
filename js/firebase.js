@@ -12,8 +12,6 @@ const firebaseConfig = {
   storageBucket: "privatefanbook.appspot.com",
   messagingSenderId: "691166733828",
   appId: "1:691166733828:web:7fb27f2b27fb95304fb751",
-
-
 };
 
 // Initialize Firebase

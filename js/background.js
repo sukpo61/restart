@@ -1,3 +1,4 @@
+
 $(function (){
 
     let container = $('.full-bg')
@@ -79,17 +80,17 @@ $(function (){
 //         });
 
 
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-      let imgName = [
+   let imgName = [
     'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
      ];
 
     let randomNumber = Math.floor(Math.random() * imgName.length);
 
-
-
-    $('.full-bg').children('img').attr('src', 'images/' + imgName[randomNumber] + '.jpg');
+    document.getElementById("background_image").src = '/images/mount.jpg';
 
 
 })
+
+

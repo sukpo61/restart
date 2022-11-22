@@ -273,15 +273,7 @@ import {
 
 
 
-    let subMenu = document.getElementById("subMenu");
 
-    function toggleMenu() {
-                    subMenu.classList.add("open_menu");
-                }
-
-
-
-    window.toggleMenu = toggleMenu
 
     window.GitHubLogin = GitHubLogin
 

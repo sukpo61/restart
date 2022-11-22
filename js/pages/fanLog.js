@@ -219,14 +219,14 @@ export const getCommentList = async () => {
 
 
 
-    function toggleMenu() {
+function toggleMenu() {
 
-      let subMenu = document.getElementById("subMenu");
-                    subMenu.classList.toggle("open_menu");
-                }
+  let subMenu = document.getElementById("subMenu");
+        subMenu.classList.toggle("open_menu");
+    }
 
 
-window.toggleMenu = toggleMenu
+window.toggleMenu = toggleMenu;
 window.save_comment = save_comment;
 window.update_comment = update_comment;
 window.onEditing = onEditing;

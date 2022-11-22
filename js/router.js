@@ -11,6 +11,7 @@ const routes = {
 import { getCommentList } from "./pages/fanLog.js";
 
  const handleLocation = async () => {
+
   let path = window.location.hash.replace("#", "");
   const pathName = window.location.pathname;
 
@@ -28,10 +29,23 @@ import { getCommentList } from "./pages/fanLog.js";
 
      // 특정 화면 렌더링 되자마자 DOM 조작 처리
      if (path === "main") {
+         console.log(authService)
          // 로그인한 회원의 프로필사진과 닉네임을 화면에 표시해줌.
-         // document.getElementById("nickname").textContent =
-         //   authService.currentUser.displayName ?? "닉네임 없음";
-         //
+         document.getElementById("nickname").textContent =
+           authService.currentUser.displayName ?? "닉네임 없음";
+
+           //탑바 맨우측 현재 계정 프로필 이미지 출력
+              document.getElementById("dropdown_profile").src =
+                authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+              //드롭다운 메뉴 속 현재 계정 프로필 이미지 출력
+              document.getElementById("top_bar_image").src =
+                authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+              //드롭다운 메뉴 속 계정 이메일 출력
+              document.getElementById("dropdown_email").textContent =
+                authService.currentUser.email ?? "계정";
+
          // document.getElementById("profileImg").src =
          //   authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 

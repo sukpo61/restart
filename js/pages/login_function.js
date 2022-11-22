@@ -275,6 +275,8 @@ import {
 
 
 
+    window.logout = logout
+
     window.GitHubLogin = GitHubLogin
 
     window.GoogleLogin = GoogleLogin

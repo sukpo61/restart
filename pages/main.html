@@ -7,19 +7,25 @@
             <nav>
                 <img src="image/logo.png" class="logo">
             
-                <img src="image/user.png" class="user-pic" onclick="toggleMenu()">
+                <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
     
                 <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
-                            <img src="image/user.png">
+                            <img src="image/user.png" id="dropdown_profile">
                             
                         </div>
                             
                         
-                        <div class="nickname">
+                        <div id="nickname">
                             <h3>Juno</h3>
                         </div>
+
+                         <div id="dropdown_email">
+                            <h3>Juno</h3>
+                        </div>
+
+
     
                         <hr>
     
@@ -28,12 +34,7 @@
                             <p>Edit profile</p>
                             <span></span>
                         </a>
-                        <a href="#" class="sub-menu-link">
-                            <img src="image/set.png">
-                            <p>Settings & Privacy</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link">
+                        <a href="#" class="sub-menu-link" onclick="logout()">
                             <img src="image/logout.png">
                             <p>Logout</p>
                             <span></span>

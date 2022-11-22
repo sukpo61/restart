@@ -2,16 +2,17 @@ import { authService } from "./firebase.js";
 
 const routes = {
   404: "/pages/404.html",
-  "/": "/pages/login.html",
+    "/": "/pages/main_before.html" ,
+  login: "/pages/login.html",
   about: "/pages/about.html",
   lorem: "/pages/lorem.html",
   create : "/pages/create.html",
   main : "/pages/main.html",
     mypage : "/pages/mypage.html"
 };
-import { getCommentList, getCommentList_mypage } from "./pages/fanLog.js";
+import {getCommentList, getCommentList_main_before, getCommentList_mypage} from "./pages/fanLog.js";
 
- const handleLocation = async () => {
+export const handleLocation = async () => {
 
   let path = window.location.hash.replace("#", "");
   const pathName = window.location.pathname;
@@ -70,10 +71,19 @@ import { getCommentList, getCommentList_mypage } from "./pages/fanLog.js";
 
          getCommentList_mypage()
      }
+      if (path === "/"){
+
+          getCommentList_main_before();
+
+      }
 };
 
-export const goToProfile = () => {
-  window.location.hash = "#profile";
+export const goTomain = () => {
+  window.location.hash = "#main";
+};
+
+export const goToLogin = () => {
+  window.location.hash = "#login";
 };
 
 // hash url 변경 시 처리

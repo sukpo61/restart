@@ -1,7 +1,7 @@
 import { handleAuth, onToggle, logout } from "./pages/auth.js";
 import { changeProfile, onFileChange } from "./pages/profile.js";
 import { socialLogin } from "./pages/auth.js";
-import { handleLocation, goToProfile } from "./router.js";
+import { handleLocation, goTomain, goToLogin } from "./router.js";
 import { authService } from "./firebase.js";
 import {
   save_comment,
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 로그인 상태이므로 항상 팬명록 화면으로 이동
       if (hash === "") {
         // 로그인 상태에서는 로그인 화면으로 되돌아갈 수 없게 설정
-        window.location.replace("#fanLog");
+        window.location.replace("#main");
       }
     } else {
       // 로그아웃 상태이므로 로그인 화면으로 강제 이동
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 window.onToggle = onToggle;
 window.handleAuth = handleAuth;
-window.goToProfile = goToProfile;
+window.goTomain = goTomain;
 window.socialLogin = socialLogin;
 window.logout = logout;
 window.onFileChange = onFileChange;
@@ -48,4 +48,5 @@ window.update_comment = update_comment;
 window.onEditing = onEditing;
 window.delete_comment = delete_comment;
 window.toggleMenu = toggleMenu; //프로필 드롭다운 메뉴 기능 관련
+window.goToLogin = goToLogin;
 // test

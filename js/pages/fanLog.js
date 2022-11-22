@@ -86,6 +86,7 @@ export const delete_comment = async (event) => {
 };
 
 export const getCommentList = async () => {
+  console.log(authService)
   let cmtObjList = [];
   const q = query(
     collection(dbService, "comments"),
@@ -357,6 +358,142 @@ export const getCommentList_mypage = async () => {
       div.innerHTML = temp_html;
       commnetList.appendChild(div);
     }});
+};
+
+export const getCommentList_main_before = async () => {
+  console.log(authService)
+  let cmtObjList = [];
+  const q = query(
+    collection(dbService, "comments"),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const commentObj = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    cmtObjList.push(commentObj);
+  });
+  const commnetList = document.getElementById("comment-list");
+  commnetList.innerHTML = "";
+  cmtObjList.forEach((cmtObj) => {
+
+      const temp_html = `
+                <div class="friends_post">
+
+                <div class="friend_post_top">
+
+                    <div class="img_and_name">
+
+                        <img src="${
+          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+      }">
+
+                        <div class="friends_name">
+                            <div class="name_and_time">
+                                <span class="friends_name">
+                                ${
+          cmtObj.nickname ?? "닉네임 없음"
+      }
+                            </span>
+                            <span class="time">${new Date(cmtObj.createdAt)
+          .toString()
+          .slice(0, 25)}</span>
+                            </div>
+                            <div><span>${cmtObj.text}</span></div>
+                            <p id="${cmtObj.id}" class="noDisplay">
+                                <input class="newCmtInput" type="text">
+                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="noDisplay">
+                    
+                    <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
+                     <button name="${
+          cmtObj.id
+      }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
+              
+                            
+<!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
+<!--                        edit-->
+<!--                        </span>-->
+<!--                        <span class="material-symbols-outlined deleteBtn" onclick="delete_comment(event)">-->
+<!--                        delete-->
+<!--                        </span>-->
+
+                    </div>
+
+                </div>
+
+
+
+                <img src="image/post_1.jpg">
+
+                <div class="info">
+
+                    <div class="emoji_img">
+                        <img src="image/like.png">
+
+                        <p>You, Charith Disanayaka and 25K others</p>
+                    </div>
+
+                    <div class="comment">
+                        <p>421 Comments</p>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="like">
+
+                    <div class="like_icon">
+                        <i class="fa-solid fa-thumbs-up activi"></i>
+                        <p>Like</p>
+                    </div>
+
+                    <div class="like_icon">
+                        <i class="fa-solid fa-message"></i>
+                        <p>Comments</p>
+                    </div>
+
+
+
+                </div>
+
+                <hr>
+
+                <div class="comment_warpper">
+
+                    <img src="image/profile.png">
+                    <div class="circle"></div>
+
+                    <div class="comment_search">
+
+                        <input type="text" placeholder="Write a comment">
+                        <i class="fa-regular fa-face-smile"></i>
+                        <i class="fa-solid fa-camera"></i>
+                        <i class="fa-regular fa-note-sticky"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+`;
+      const div = document.createElement("div");
+      div.classList.add("mycards");
+      div.innerHTML = temp_html;
+      commnetList.appendChild(div);
+    });
 };
 
 function toggleMenu() {

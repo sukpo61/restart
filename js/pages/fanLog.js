@@ -10,6 +10,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { dbService, authService } from "../firebase.js";
 
+let path = window.location.hash.replace("#", "");
+
 export const save_comment = async (event) => {
   event.preventDefault();
   const comment = document.getElementById("comment");
@@ -23,32 +25,13 @@ export const save_comment = async (event) => {
       nickname: displayName,
     });
     comment.value = "";
-    getCommentList();
+    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
   }
 };
 
-export const save_comment_mypage = async (event) => {
-  event.preventDefault();
-  const comment = document.getElementById("comment");
-  const { uid, photoURL, displayName } = authService.currentUser;
-  try {
-    await addDoc(collection(dbService, "comments"), {
-      text: comment.value,
-      createdAt: Date.now(),
-      creatorId: uid,
-      profileImg: photoURL,
-      nickname: displayName,
-    });
-    comment.value = "";
-    getCommentList_mypage();
-  } catch (error) {
-    alert(error);
-    console.log("error in addDoc:", error);
-  }
-};
 
 export const onEditing = (event) => {
   // 수정버튼 클릭
@@ -81,7 +64,8 @@ export const update_comment = async (event) => {
   const commentRef = doc(dbService, "comments", id);
   try {
     await updateDoc(commentRef, { text: newComment });
-    getCommentList();
+    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
+
   } catch (error) {
     alert(error);
   }
@@ -94,7 +78,7 @@ export const delete_comment = async (event) => {
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
-      getCommentList();
+    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
     } catch (error) {
       alert(error);
     }
@@ -387,4 +371,3 @@ window.save_comment = save_comment;
 window.update_comment = update_comment;
 window.onEditing = onEditing;
 window.delete_comment = delete_comment;
-window.save_comment_mypage = save_comment_mypage;

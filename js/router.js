@@ -50,9 +50,6 @@ import { getCommentList, getCommentList_mypage } from "./pages/fanLog.js";
          document.getElementById("dropdown_email").textContent =
              authService.currentUser.email ?? "계정";
 
-         document.getElementById("profileImg").src =
-           authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
-
          getCommentList();
      }
      if (path === "mypage") {
@@ -60,11 +57,16 @@ import { getCommentList, getCommentList_mypage } from "./pages/fanLog.js";
              authService.currentUser.displayName ?? "닉네임 없음";
 
          document.getElementById("mypage_profile").src =
-           authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
          document.getElementById("mypage_email").textContent =
              authService.currentUser.email ?? "계정";
 
+         document.getElementById("top_bar_image").src =
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+         document.getElementById("post_top_profile").src =
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
          getCommentList_mypage()
      }

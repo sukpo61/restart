@@ -1,10 +1,6 @@
  <div class="main">
 
-
-        <!------------center---------------------->
-
-        <div class="center">
-            <nav>
+       <nav>
                 <img src="image/logo.png" class="logo" onclick="goTomain()">
 
                 <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
@@ -43,6 +39,10 @@
                 </div>
 
             </nav>
+        <!------------center---------------------->
+
+        <div class="center">
+
 
 
             <div class="top_box">
@@ -80,12 +80,19 @@
                 <div class="post_bottom">
 
 
-                    <button  class="post_icon">
-                        <i class="fa-solid fa-images green"></i>
-                        <p>Photo</p>
+                   <button  class="post_icon">
+
+                        <span class="material-symbols-outlined" id="img_color">
+                            image
+                            </span>
+                        <span>
+                            image
+                        </span>
                     </button>
                     <button onclick="save_comment(event)" type="button" class="post_icon">
-                        <i class="fa-solid fa-images green"></i>
+                        <span class="material-symbols-outlined" id="send_color">
+                            send
+                            </span>
                     </button>
 
 
@@ -102,7 +109,7 @@
 
                     <div class="img_and_name">
 
-                        <img src="image/post_1.jpg">
+                        <div class="post_img"><img src="image/post_1.jpg"> </div>
 
                         <div class="friends_name">
                             <div class="name_and_time">

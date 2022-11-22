@@ -2,9 +2,7 @@
 
 
         <!------------center---------------------->
-
-        <div class="center">
-            <nav>
+    <nav>
                 <img src="image/logo.png" class="logo" onclick="goTomain()">
 
                 <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
@@ -45,6 +43,10 @@
             </nav>
 
 
+        <div class="center">
+
+
+
             <div class="top_box">
 
                     <img src=" ">
@@ -71,11 +73,18 @@
 
 
                     <button  class="post_icon">
-                        <i class="fa-solid fa-images green"></i>
-                        <p>Photo</p>
+
+                        <span class="material-symbols-outlined" id="img_color">
+                            image
+                            </span>
+                        <span>
+                            image
+                        </span>
                     </button>
                     <button onclick="save_comment(event)" type="button" class="post_icon">
-                        <i class="fa-solid fa-images green"></i>
+                        <span class="material-symbols-outlined" id="send_color">
+                            send
+                            </span>
                     </button>
 
 

@@ -39,7 +39,7 @@ export const onEditing = (event) => {
   const udBtns = document.querySelectorAll(".editBtn, .deleteBtn");
   udBtns.forEach((udBtn) => (udBtn.disabled = "true"));
 
-  const cardBody = event.target.parentNode.parentNode;
+  const cardBody = event.target.parentNode.parentNode.parentNode;
   const commentText = cardBody.children[0].children[1].children[1];
   const commentInputP = cardBody.children[0].children[1].children[2];
 
@@ -73,7 +73,7 @@ export const update_comment = async (event) => {
 
 export const delete_comment = async (event) => {
   event.preventDefault();
-  const id = event.target.name;
+  const id = event.target.parentNode.name;
   const ok = window.confirm("해당 응원글을 정말 삭제하시겠습니까?");
   if (ok) {
     try {
@@ -141,18 +141,15 @@ export const getCommentList = async () => {
 
                     <div class=${isOwner ? "menu" : "noDisplay"}>
                     
-                    <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
-                     <button name="${
-          cmtObj.id
-      }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
-              
-                            
-<!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
-<!--                        edit-->
-<!--                        </span>-->
-<!--                        <span class="material-symbols-outlined deleteBtn" onclick="delete_comment(event)">-->
-<!--                        delete-->
-<!--                        </span>-->
+                   <button onclick="onEditing(event)" class="editBtn btn">
+                            <span class="material-symbols-outlined botton_color">
+                                edit
+                            </span>
+                        </button>
+                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn btn">
+                            <span class="material-symbols-outlined botton_color">
+                                delete
+                            </span>
 
                     </div>
 
@@ -250,38 +247,43 @@ export const getCommentList_mypage = async () => {
 
                     <div class="img_and_name">
 
-                        <img src="${
-          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-      }">
+                        <img src="${cmtObj.profileImg ?? "../assets/blankProfile.webp"}">
 
-                        <div class="friends_name">
-                            <div class="name_and_time">
-                                <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
-                            </span>
-                            <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                            <div class="friends_name">
+                                <div class="name_and_time">
+                                    <span class="friends_name">
+                                         ${cmtObj.nickname ?? "닉네임 없음"}
+                                    </span>
+                                    <span class="time">
+                                        ${new Date(cmtObj.createdAt).toString().slice(0, 25)}
+                                    </span>
+                                </div>
+                            <div>
+                                <span>${cmtObj.text}
+                                </span>
                             </div>
-                            <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
                                 <button class="updateBtn" onclick="update_comment(event)">완료</button>
                             </p>
 
-                        </div>
+                            </div>
 
 
                     </div>
 
                     <div class=${isOwner ? "menu" : "noDisplay"}>
                     
-                    <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
-                     <button name="${
-          cmtObj.id
-      }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
+                      <button onclick="onEditing(event)" class="editBtn btn">
+                            <span class="material-symbols-outlined botton_color">
+                                edit
+                            </span>
+                        </button>
+                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn btn">
+                            <span class="material-symbols-outlined botton_color">
+                                delete
+                            </span>
+                      </button>
               
                             
 <!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->

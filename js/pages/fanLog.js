@@ -10,9 +10,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { dbService, authService } from "../firebase.js";
 
-let path = window.location.hash.replace("#", "");
 
 export const save_comment = async (event) => {
+  let path = window.location.hash.replace("#", "");
   event.preventDefault();
   const comment = document.getElementById("comment");
   const { uid, photoURL, displayName } = authService.currentUser;
@@ -25,7 +25,7 @@ export const save_comment = async (event) => {
       nickname: displayName,
     });
     comment.value = "";
-    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
+    if(path == "main"){getCommentList();} else {getCommentList_mypage()}
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
@@ -50,6 +50,7 @@ export const onEditing = (event) => {
 };
 
 export const update_comment = async (event) => {
+  let path = window.location.hash.replace("#", "");
   event.preventDefault();
   const newComment = event.target.parentNode.children[0].value;
   const id = event.target.parentNode.id;
@@ -72,6 +73,7 @@ export const update_comment = async (event) => {
 };
 
 export const delete_comment = async (event) => {
+  let path = window.location.hash.replace("#", "");
   event.preventDefault();
   const id = event.target.parentNode.name;
   const ok = window.confirm("해당 응원글을 정말 삭제하시겠습니까?");
@@ -141,15 +143,17 @@ export const getCommentList = async () => {
 
                     <div class=${isOwner ? "menu" : "noDisplay"}>
                     
-                   <button onclick="onEditing(event)" class="editBtn btn">
+                                        <button onclick="onEditing(event)" class="editBtn mar_10">
                             <span class="material-symbols-outlined botton_color">
                                 edit
                             </span>
                         </button>
-                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn btn">
+                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
+                      </button>
+              
 
                     </div>
 
@@ -157,7 +161,9 @@ export const getCommentList = async () => {
 
 
 
-                <img src="image/post_1.jpg">
+             <div class="post_img">
+                   <img src="image/post_1.jpg">
+                   </div>
 
                 <div class="info">
 
@@ -274,32 +280,28 @@ export const getCommentList_mypage = async () => {
 
                     <div class=${isOwner ? "menu" : "noDisplay"}>
                     
-                      <button onclick="onEditing(event)" class="editBtn btn">
+                      <button onclick="onEditing(event)" class="editBtn mar_10">
                             <span class="material-symbols-outlined botton_color">
                                 edit
                             </span>
                         </button>
-                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn btn">
+                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
                       </button>
               
                             
-<!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
-<!--                        edit-->
-<!--                        </span>-->
-<!--                        <span class="material-symbols-outlined deleteBtn" onclick="delete_comment(event)">-->
-<!--                        delete-->
-<!--                        </span>-->
 
                     </div>
 
                 </div>
 
 
-
-                <img src="image/post_1.jpg">
+                   <div class="post_img">
+                   <img src="image/post_1.jpg">
+                   </div>
+                
 
                 <div class="info">
 
@@ -435,7 +437,9 @@ export const getCommentList_main_before = async () => {
 
 
 
-                <img src="image/post_1.jpg">
+              <div class="post_img">
+                   <img src="image/post_1.jpg">
+                   </div>
 
                 <div class="info">
 

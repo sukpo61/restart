@@ -29,6 +29,12 @@ p{
     color: #42636b;
 }
 
+.post_img{
+    padding: 0 95px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
 /*-----------------main---------------*/
 
 .main{

@@ -46,19 +46,33 @@
 
 
             <div class="top_box">
+                    <form id="profileForm" onsubmit="changeProfile(event)">
+                            <label id="imgLabel" for="imgInput">
+                              <img src="image/user.png" id="mypage_profile" />
+                              <input
+                                onchange="onFileChange(event)"
+                                id="imgInput"
+                                type="file"
+                                accept="images/*"
+                                class="noDisplay"
+                              />
+                            </label>
+                            <div>
+                              <input
+                                id="profileNickname"
+                                type="text"
+                                placeholder="현재 닉네임"
+                                value=""
+                              />
+                            </div>
+                            <br />
+                            <input id="profileBtn" type="submit" value="프로필 변경" />
+                          </form>
 
-                <img src="image/user.png" id = "mypage_profile">
-                <div class="my_info">
-                    <p class="email" id="mypage_email">
-                            example@.com
-                    </p>
-                    <p class="name" id="mypage_nickname">
-                            Nickname
-                    </p>
-                </div>
-
-
-
+                          <div class="my_info">
+                            <p class="email" id="mypage_email">example@.com</p>
+                            <p class="name" id="mypage_nickname">Nickname</p>
+      </div>
 
             </div>
 

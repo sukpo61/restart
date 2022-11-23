@@ -36,6 +36,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+
+   let imgName = [
+    'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
+     ];
+
+    let randomNumber = Math.floor(Math.random() * imgName.length);
+
+    document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
+
+})
+
+
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 window.onToggle = onToggle;
 window.handleAuth = handleAuth;
@@ -52,4 +65,4 @@ window.toggleMenu = toggleMenu; //프로필 드롭다운 메뉴 기능 관련
 window.goToLogin = goToLogin;
 // test
 window.post_onFileChange = post_onFileChange;
-window.post_changeProfile = post_changeProfile;
+

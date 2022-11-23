@@ -47,12 +47,12 @@
 
             <div class="top_box">
                     <form id="profileForm" onsubmit="changeProfile(event)">
-                            <label id="imgLabel" for="imgInput">
+                            <label id="top_imgLabel" for="top_imgInput">
                               <img src="image/user.png" id="mypage_profile" />
 
                               <input
                                 onchange="onFileChange(event)"
-                                id="imgInput"
+                                id="top_imgInput"
                                 type="file"
                                 accept="images/*"
                                 class="noDisplay"
@@ -98,24 +98,43 @@
                 <div class="post_bottom">
 
 
-                   <button  class="post_icon">
+                 <label id="imgLabel" for="imgInput">
 
-                        <span class="material-symbols-outlined" id="img_color">
-                            image
-                            </span>
-                        <span>
-                            image
-                        </span>
-                    </button>
-                    <button onclick="save_comment(event)" type="button" class="post_icon">
+                                <span class="material-symbols-outlined" id="img_color">
+                                    image
+                                    </span>
+                                <span>
+                                    image
+                                </span>
+
+
+
+                              <input
+                                onchange="post_onFileChange(event)"
+                                id="imgInput"
+                                type="file"
+                                accept="images/*"
+                                class="noDisplay"
+                              />
+                            </label>
+
+
+                        <div class="profile_input">
+
+
+                             <button onclick="save_comment(event)" type="submit" class="post_icon">
                         <span class="material-symbols-outlined" id="send_color">
                             send
                             </span>
                     </button>
 
 
-                </div>
+                        </div>
 
+                </div>
+                <div class="thumnail">
+                    <img src="" id="posted_img" class="noDisplay">
+                </div>
             </div>
 
 

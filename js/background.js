@@ -88,9 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let randomNumber = Math.floor(Math.random() * imgName.length);
 
-    document.getElementById("background_image").src = '/images/mount.jpg';
+    document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
 
 
-})
+}
+
+)
 
 

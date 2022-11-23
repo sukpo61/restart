@@ -20,6 +20,7 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 let Uploaded = false
 
 export const post_onFileChange = (event) => {
+  document.getElementById("posted_img").classList.remove("noDisplay")
   Uploaded = !Uploaded
   const theFile = event.target.files[0]; // file 객체
   const reader = new FileReader();
@@ -69,6 +70,8 @@ export const save_comment = async (event) => {
   document.getElementById("posted_img").src = ""
   localStorage.removeItem('imgDataUrl3')
   Uploaded = !Uploaded
+    document.getElementById("posted_img").classList.add("noDisplay")
+
 
   } else {
     let data = {
@@ -166,9 +169,10 @@ export const getCommentList = async () => {
   });
   const commnetList = document.getElementById("comment-list");
   const currentUid = authService.currentUser.uid;
+
   commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
-
+      const imgemptycheck = cmtObj.Downurl === ""
       const isOwner = currentUid === cmtObj.creatorId;
       const temp_html = `
                 <div class="friends_post">
@@ -223,7 +227,7 @@ export const getCommentList = async () => {
 
 
 
-             <div class="post_img">
+             <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
                    <img src="${cmtObj.Downurl}">
                    </div>
 
@@ -308,6 +312,8 @@ export const getCommentList_mypage = async () => {
   cmtObjList.forEach((cmtObj) => {
     if(cmtObj.creatorId == currentUid) {
       const isOwner = currentUid === cmtObj.creatorId;
+      const imgemptycheck = cmtObj.Downurl === ""
+
       const temp_html = `
                 <div class="friends_post">
 
@@ -360,7 +366,7 @@ export const getCommentList_mypage = async () => {
                 </div>
 
 
-                   <div class="post_img">
+                   <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
                    <img src="${cmtObj.Downurl}">
                    </div>
                 
@@ -444,7 +450,7 @@ export const getCommentList_main_before = async () => {
   const commnetList = document.getElementById("comment-list");
   commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
-
+      const imgemptycheck = cmtObj.Downurl === ""
       const temp_html = `
                 <div class="friends_post">
 
@@ -499,8 +505,8 @@ export const getCommentList_main_before = async () => {
 
 
 
-              <div class="post_img">
-                   <img src="${cmtObj.Downurl}">
+              <div id="post_img">
+                   <img src="${cmtObj.Downurl}" class=${imgemptycheck ? "noDisplay" : ""}>
                    </div>
 
                 <div class="info">

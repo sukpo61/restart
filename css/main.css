@@ -29,7 +29,7 @@ p{
     color: #42636b;
 }
 
-.post_img{
+#post_img{
     padding: 0 95px;
     border-radius: 12px;
     overflow: hidden;
@@ -87,6 +87,12 @@ p{
     object-fit: cover;
     border-radius: 12px;
 }
+#top_imgLabel{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+}
 #imgLabel{
     display: flex;
     align-items: center;
@@ -123,7 +129,7 @@ nav{
     padding: 10px 1%;
     display: flex;
     left: 0;
-    top: 0
+    top: 0;
     bottom: 97.2%;
     align-items: center;
     justify-content: space-between;
@@ -441,14 +447,16 @@ nav{
 }
 
 
-.main .center .friends_post .friend_post_top .img_and_name .friends_name .friends_name{
-    font-weight: bold;
+.friends_name{
+    font-size: 17px;
+    font-weight: 400;
     cursor: pointer;
 }
 
 
 .time{
-    font-size: 20px;
+    line-height: 25px;
+    font-size: 15px;
     color: #919191;
     margin: 0 0 0 10px;
 }

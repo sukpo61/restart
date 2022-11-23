@@ -71,10 +71,31 @@ p{
 }
 
 .newCmtInput{
-    width: 800px;
+    width: 80%;
 }
 
 .updateBtn{
+    margin-left: 15px;
+    padding: 0 10px;
+    border-radius: 15px;
+    background: #efefef;
+    font-size: 15px;
+}
+#posted_img{
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+#imgLabel{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+}
+.thumnail{
+    display: flex;
+    justify-content: center;
 
 }
 
@@ -202,8 +223,9 @@ nav{
 /* top-bar */
 
 
-.main .center{
-    width: 1200px;
+.center{
+    min-width: 700px;
+    width: 45%;
     height: auto;
     padding: 0;
     background: #E7ECF0;
@@ -404,7 +426,6 @@ nav{
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
-    margin-right: 15px;
     cursor: pointer;
 }
 
@@ -413,7 +434,7 @@ nav{
 }
 
 .img_and_name{
-    width: 80%;
+    width: 100%;
 }
 
 .comment_box{
@@ -425,21 +446,19 @@ nav{
     cursor: pointer;
 }
 
-.main .center .friends_post .friend_post_top .img_and_name .friends_name .friends_name:hover{
-    text-decoration: underline;
-}
 
-.main .center .friends_post .friend_post_top .img_and_name .friends_name .time{
+.time{
     font-size: 20px;
     color: #919191;
-    margin: 0 0 0 3px;
+    margin: 0 0 0 10px;
 }
 
-.main .center .friends_post .friend_post_top .img_and_name .friends_name {
+.comment_contents {
     display: flex;
     flex-direction: column;
     font-size: 20px;
-    margin-left: ;
+    margin-left: 15px ;
+    width: 80%;
 }
 
 .main .center .friends_post .friend_post_top .menu{

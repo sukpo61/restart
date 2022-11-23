@@ -71,25 +71,45 @@
 
                 <div class="post_bottom">
 
+                            <label id="imgLabel" for="imgInput">
 
-                    <button  class="post_icon">
+                                <span class="material-symbols-outlined" id="img_color">
+                                    image
+                                    </span>
+                                <span>
+                                    image
+                                </span>
 
-                        <span class="material-symbols-outlined" id="img_color">
-                            image
-                            </span>
-                        <span>
-                            image
-                        </span>
-                    </button>
-                    <button onclick="save_comment(event)" type="button" class="post_icon">
+
+
+                              <input
+                                onchange="post_onFileChange(event)"
+                                id="imgInput"
+                                type="file"
+                                accept="images/*"
+                                class="noDisplay"
+                              />
+                            </label>
+
+
+                        <div class="profile_input">
+
+
+                             <button onclick="save_comment(event)" type="submit" class="post_icon">
                         <span class="material-symbols-outlined" id="send_color">
                             send
                             </span>
                     </button>
 
 
-                </div>
+                        </div>
 
+
+
+                </div>
+                 <div class="thumnail">
+                    <img src="" id="posted_img">
+                </div>
             </div>
 
 

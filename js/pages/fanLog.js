@@ -8,29 +8,91 @@ import {
   query,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-import { dbService, authService } from "../firebase.js";
+import { dbService, authService, storageService } from "../firebase.js";
+import {
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
+import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
+let Uploaded = false
+
+export const post_onFileChange = (event) => {
+  Uploaded = !Uploaded
+  const theFile = event.target.files[0]; // file 객체
+  const reader = new FileReader();
+  reader.readAsDataURL(theFile); // file 객체를 브라우저가 읽을 수 있는 data URL로 읽음.
+  reader.onloadend = (finishedEvent) => {
+    // 파일리더가 파일객체를 data URL로 변환 작업을 끝났을 때
+    const imgDataUrl3 = finishedEvent.currentTarget.result;
+    localStorage.setItem("imgDataUrl3", imgDataUrl3);
+    document.getElementById("posted_img").src = imgDataUrl3;
+
+  };
+};
 
 export const save_comment = async (event) => {
+    event.preventDefault();
   let path = window.location.hash.replace("#", "");
-  event.preventDefault();
   const comment = document.getElementById("comment");
   const { uid, photoURL, displayName } = authService.currentUser;
-  try {
-    await addDoc(collection(dbService, "comments"), {
+
+  if(Uploaded){
+  const imgRef = ref(
+    storageService,
+    `${authService.currentUser.uid}/post_images/${uuidv4()}`
+  );
+  const imgDataUrl3 = localStorage.getItem("imgDataUrl3");
+  let downloadUrl;
+    const response = await uploadString(imgRef, imgDataUrl3, "data_url");
+    downloadUrl = await getDownloadURL(response.ref);
+
+    let data = {
       text: comment.value,
       createdAt: Date.now(),
       creatorId: uid,
       profileImg: photoURL,
       nickname: displayName,
-    });
+      Downurl : downloadUrl,
+    }
+
+    try {
+    await addDoc(collection(dbService, "comments"), data);
     comment.value = "";
     if(path == "main"){getCommentList();} else {getCommentList_mypage()}
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
   }
-};
+  document.getElementById("posted_img").src = ""
+  localStorage.removeItem('imgDataUrl3')
+  Uploaded = !Uploaded
+
+  } else {
+    let data = {
+      text: comment.value,
+      createdAt: Date.now(),
+      creatorId: uid,
+      profileImg: photoURL,
+      nickname: displayName,
+      Downurl : "",
+    }
+
+    try {
+    await addDoc(collection(dbService, "comments"), data);
+    comment.value = "";
+    if(path == "main"){getCommentList();} else {getCommentList_mypage()}
+  } catch (error) {
+    alert(error);
+    console.log("error in addDoc:", error);
+  }
+
+  }
+
+
+}
 
 
 export const onEditing = (event) => {
@@ -119,7 +181,7 @@ export const getCommentList = async () => {
           cmtObj.profileImg ?? "../assets/blankProfile.webp"
       }">
 
-                        <div class="friends_name">
+                        <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
                                 ${
@@ -162,7 +224,7 @@ export const getCommentList = async () => {
 
 
              <div class="post_img">
-                   <img src="image/post_1.jpg">
+                   <img src="${cmtObj.Downurl}">
                    </div>
 
                 <div class="info">
@@ -255,25 +317,25 @@ export const getCommentList_mypage = async () => {
 
                         <img src="${cmtObj.profileImg ?? "../assets/blankProfile.webp"}">
 
-                            <div class="comment_box">
-                                <div class="name_and_time">
-                                    <span class="friends_name">
-                                         ${cmtObj.nickname ?? "닉네임 없음"}
-                                    </span>
-                                    <span class="time">
-                                        ${new Date(cmtObj.createdAt).toString().slice(0, 25)}
-                                    </span>
-                                </div>
-                            <div>
-                                <span>${cmtObj.text}
-                                </span>
+                             <div class="comment_contents">
+                            <div class="name_and_time">
+                                <span class="friends_name">
+                                ${
+          cmtObj.nickname ?? "닉네임 없음"
+      }
+                            </span>
+                            <span class="time">${new Date(cmtObj.createdAt)
+          .toString()
+          .slice(0, 25)}</span>
                             </div>
+                            <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
                                 <button class="updateBtn" onclick="update_comment(event)">완료</button>
                             </p>
 
-                            </div>
+                        </div>
+
 
 
                     </div>
@@ -299,7 +361,7 @@ export const getCommentList_mypage = async () => {
 
 
                    <div class="post_img">
-                   <img src="image/post_1.jpg">
+                   <img src="${cmtObj.Downurl}">
                    </div>
                 
 
@@ -394,7 +456,7 @@ export const getCommentList_main_before = async () => {
           cmtObj.profileImg ?? "../assets/blankProfile.webp"
       }">
 
-                        <div class="friends_name">
+                        <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
                                 ${
@@ -438,7 +500,7 @@ export const getCommentList_main_before = async () => {
 
 
               <div class="post_img">
-                   <img src="image/post_1.jpg">
+                   <img src="${cmtObj.Downurl}">
                    </div>
 
                 <div class="info">

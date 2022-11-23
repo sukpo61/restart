@@ -255,7 +255,7 @@ export const getCommentList_mypage = async () => {
 
                         <img src="${cmtObj.profileImg ?? "../assets/blankProfile.webp"}">
 
-                            <div class="friends_name">
+                            <div class="comment_box">
                                 <div class="name_and_time">
                                     <span class="friends_name">
                                          ${cmtObj.nickname ?? "닉네임 없음"}

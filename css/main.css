@@ -44,6 +44,38 @@ p{
     width: 180px;
     height: 180px;
     object-fit: cover;
+    cursor: pointer;
+}
+
+#profileForm{
+    display: flex;
+}
+
+.profile_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#profileBtn{
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 15px;
+
+
+}
+
+.my_info{
+    text-align: right;
+}
+
+.newCmtInput{
+    width: 800px;
+}
+
+.updateBtn{
+
 }
 
 /*-----------------main---------------*/
@@ -188,8 +220,11 @@ nav{
     height: 260px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
 
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+.top_box{
+    padding: 0 50px;
 }
 
 .main .center .top_box img{
@@ -380,6 +415,10 @@ nav{
 .img_and_name{
     width: 80%;
 }
+
+.comment_box{
+}
+
 
 .main .center .friends_post .friend_post_top .img_and_name .friends_name .friends_name{
     font-weight: bold;

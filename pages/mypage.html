@@ -49,6 +49,7 @@
                     <form id="profileForm" onsubmit="changeProfile(event)">
                             <label id="imgLabel" for="imgInput">
                               <img src="image/user.png" id="mypage_profile" />
+
                               <input
                                 onchange="onFileChange(event)"
                                 id="imgInput"
@@ -57,16 +58,19 @@
                                 class="noDisplay"
                               />
                             </label>
-                            <div>
+                        <div class="profile_input">
+                            <div >
                               <input
+                                      class="form-control"
                                 id="profileNickname"
                                 type="text"
                                 placeholder="현재 닉네임"
                                 value=""
                               />
                             </div>
-                            <br />
+                            </br>
                             <input id="profileBtn" type="submit" value="프로필 변경" />
+                        </div>
                           </form>
 
                           <div class="my_info">
@@ -125,7 +129,7 @@
 
                         <div class="post_img"><img src="image/post_1.jpg"> </div>
 
-                        <div class="friends_name">
+                        <div class="comment_box">
                             <div class="name_and_time">
                                 <span class="friends_name">
                                 Senuda De Silva

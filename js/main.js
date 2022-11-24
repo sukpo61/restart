@@ -15,6 +15,14 @@ import {
 // url 바뀌면 handleLocation 실행하여 화면 변경
 window.addEventListener("hashchange", handleLocation);
 
+window.addEventListener("hashchange",() =>{
+  if($("#body").hasClass("dark-theme")){
+   let darkBtn = document.getElementById("dark-btn");
+  darkBtn.classList.toggle("dark-btn-on");
+  }
+
+});
+
 // 첫 랜딩 또는 새로고침 시 handleLocation 실행하여 화면 변경
 document.addEventListener("DOMContentLoaded", function () {
   // Firebase 연결상태를 감시

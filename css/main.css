@@ -4,11 +4,16 @@
     box-sizing: border-box;
 }
 
+button{
+
+}
+
 p{
     margin-bottom: 0;
 }
 .material-symbols-outlined {
-  font-variation-settings:
+      background-color: var(--my_postback);
+    font-variation-settings:
   'FILL' 1,
   'wght' 400,
   'GRAD' -25,
@@ -162,9 +167,10 @@ p{
 }
 
 .main_before_login_button_box{
+    background-color: var(--main_before_login-color);
     width: 200px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 .main_before_login_button{
@@ -172,6 +178,7 @@ p{
     align-items: center;
 }
 .login_text{
+    background-color: var(--main_before_login-color);
     margin-right: 10px;
 }
 
@@ -385,6 +392,7 @@ nav{
 
     }
     .dark-theme{
+        --main_before_login-color:#0f0f0f;
         --search-color:#fff;
         --searchback-color:#0f0f0f;
         --sublink-color:#fff;

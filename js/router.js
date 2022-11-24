@@ -57,11 +57,7 @@ export const handleLocation = async () => {
     getCommentList();
   }
 
-  const darkBtn = document.getElementById("dark-btn");
-  darkBtn.onclick = function () {
-    darkBtn.classList.toggle("dark-btn-on");
-    document.body.classList.toggle("dark-theme");
-  };
+
 
   if (path === "mypage") {
     document.getElementById("mypage_nickname").textContent =
@@ -93,6 +89,12 @@ export const handleLocation = async () => {
   if (path === "/") {
     getCommentList_main_before();
   }
+
+  if($("#body").hasClass("dark-theme")){
+   let darkBtn = document.getElementById("dark-btn");
+   darkBtn.classList.toggle("dark-btn-on");
+  }
+
 };
 
 export const goTomain = () => {
@@ -109,9 +111,10 @@ window.addEventListener("hashchange", handleLocation);
 // 첫 랜딩 또는 새로고침 시 처리
 document.addEventListener("DOMContentLoaded", handleLocation);
 
-var darkBtn = document.getElementById("dark-btn");
+
 
 export const darkBtnclick = () => {
+  let darkBtn = document.getElementById("dark-btn");
   darkBtn.classList.toggle("dark-btn-on");
   document.body.classList.toggle("dark-theme");
 };

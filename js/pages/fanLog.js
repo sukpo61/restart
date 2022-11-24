@@ -160,7 +160,6 @@ export const delete_comment = async (event) => {
   }
 };
 
-
 export const getCommentList = async (searchContent, searchList) => {
   let cmtObjList = [];
   let showList = [];
@@ -192,7 +191,7 @@ export const getCommentList = async (searchContent, searchList) => {
   // debugger;
   showList.forEach((cmtObj) => {
     // debugger;
-      const imgemptycheck = cmtObj.Downurl === ""
+    const imgemptycheck = cmtObj.Downurl === "";
     const isOwner = currentUid === cmtObj.creatorId;
     const temp_html = `
                 <div class="friends_post">
@@ -305,7 +304,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
   showList.forEach((cmtObj) => {
     if (cmtObj.creatorId == currentUid) {
       const isOwner = currentUid === cmtObj.creatorId;
-      const imgemptycheck = cmtObj.Downurl === ""
+      const imgemptycheck = cmtObj.Downurl === "";
       const temp_html = `
                 <div class="friends_post">
 
@@ -417,7 +416,7 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
   const commnetList = document.getElementById("comment-list");
   commnetList.innerHTML = "";
   showList.forEach((cmtObj) => {
-    const imgemptycheck = cmtObj.Downurl === ""
+    const imgemptycheck = cmtObj.Downurl === "";
 
     const temp_html = `
                 <div class="friends_post">

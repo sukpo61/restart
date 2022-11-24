@@ -24,9 +24,14 @@ p{
     color:var(--send-color);
     font-size: 40px;
 }
-
+.editBtn{
+    background-color:var(--my_postback);
+}
+.deleteBtn{
+    background-color:var(--my_postback);
+}
 .botton_color{
-    background-color: red;
+
     color:var(--send-color);
 }
 
@@ -128,6 +133,8 @@ p{
 
 .searchButton{
     margin-left: 10px !important;
+    background-color: var(--searchback-color);
+    color: var(--search-color);
 }
 
 #profileNickname {
@@ -362,6 +369,8 @@ nav{
     }
 
     :root{
+        --search-color:#0f0f0f;
+        --searchback-color:#fff;
         --sublink-color:#525252;
         --sub-color:#000;
         --subback-color:#fff;
@@ -376,6 +385,8 @@ nav{
 
     }
     .dark-theme{
+        --search-color:#fff;
+        --searchback-color:#0f0f0f;
         --sublink-color:#fff;
         --sub-color:#fff;
         --subback-color:#212121;
@@ -387,7 +398,6 @@ nav{
         --main-color:#0f0f0f;
         --body-color:#0f0f0f;
         --nav-color:#0f0f0f;
-
     }
     body{
         background-color: var(--body-color);
@@ -439,6 +449,15 @@ nav{
     border-radius: 50%;
     margin-right: 50px;
 }
+span{
+    color: var(--search-color)
+}
+.email{
+    color: var(--search-color)
+}
+.name{
+    color: var(--search-color)
+}
 
 .main .center .my_top_box .email {
     font-weight: bold;
@@ -459,7 +478,6 @@ nav{
 .main .center .my_post{
     width: 100%;
     height: auto;
-    background: #fff;
     padding: 10px 15px;
     border-radius: 12px;
     box-shadow: 0 1px 8px rgba(0,0,0,0.2);
@@ -642,7 +660,7 @@ nav{
 .main .center .friends_post .friend_post_top .menu:hover{
     cursor: pointer;
 }
-
+.menu{}
 .main .center .friends_post .friend_post_top .menu i{
     line-height: 35px;
     margin-left: 8px;

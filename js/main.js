@@ -9,7 +9,7 @@ import {
   onEditing,
   delete_comment,
   post_onFileChange,
-    getSearchResult
+  getSearchResult,
 } from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
@@ -75,4 +75,3 @@ window.post_onFileChange = post_onFileChange;
 window.getSearchResult = getSearchResult;
 window.toggleEdit = toggleEdit;
 window.darkBtnclick = darkBtnclick;
-

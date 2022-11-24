@@ -26,6 +26,7 @@ export const changeProfile = async (event) => {
     downloadUrl = await getDownloadURL(response.ref);
     console.log("downloadurl: ", downloadUrl);
   }
+
   await updateProfile(authService.currentUser, {
     displayName: newNickname ? newNickname : null,
     photoURL: downloadUrl ? downloadUrl : null,
@@ -33,7 +34,7 @@ export const changeProfile = async (event) => {
     .then(() => {
       alert("프로필 수정 완료");
       window.location.hash = "#mypage";
-      window.location.reload()
+      window.location.reload();
     })
     .catch((error) => {
       alert("프로필 수정 실패");
@@ -48,10 +49,9 @@ export const onFileChange = (event) => {
   reader.onloadend = (finishedEvent) => {
     // 파일리더가 파일객체를 data URL로 변환 작업을 끝났을 때
     const imgDataUrl2 = finishedEvent.currentTarget.result;
-    console.log(imgDataUrl2)
+    console.log(imgDataUrl2);
     localStorage.setItem("imgDataUrl2", imgDataUrl2);
     document.getElementById("mypage_profile").src = imgDataUrl2;
-
   };
 };
 

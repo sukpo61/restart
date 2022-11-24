@@ -17,11 +17,11 @@ import {
 import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
-let Uploaded = false
+let Uploaded = false;
 
 export const post_onFileChange = (event) => {
-  document.getElementById("posted_img").classList.remove("noDisplay")
-  Uploaded = !Uploaded
+  document.getElementById("posted_img").classList.remove("noDisplay");
+  Uploaded = !Uploaded;
   const theFile = event.target.files[0]; // file 객체
   const reader = new FileReader();
   reader.readAsDataURL(theFile); // file 객체를 브라우저가 읽을 수 있는 data URL로 읽음.
@@ -30,23 +30,22 @@ export const post_onFileChange = (event) => {
     const imgDataUrl3 = finishedEvent.currentTarget.result;
     localStorage.setItem("imgDataUrl3", imgDataUrl3);
     document.getElementById("posted_img").src = imgDataUrl3;
-
   };
 };
 
 export const save_comment = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
   let path = window.location.hash.replace("#", "");
   const comment = document.getElementById("comment");
   const { uid, photoURL, displayName } = authService.currentUser;
 
-  if(Uploaded){
-  const imgRef = ref(
-    storageService,
-    `${authService.currentUser.uid}/post_images/${uuidv4()}`
-  );
-  const imgDataUrl3 = localStorage.getItem("imgDataUrl3");
-  let downloadUrl;
+  if (Uploaded) {
+    const imgRef = ref(
+      storageService,
+      `${authService.currentUser.uid}/post_images/${uuidv4()}`
+    );
+    const imgDataUrl3 = localStorage.getItem("imgDataUrl3");
+    let downloadUrl;
     const response = await uploadString(imgRef, imgDataUrl3, "data_url");
     downloadUrl = await getDownloadURL(response.ref);
 
@@ -56,23 +55,25 @@ export const save_comment = async (event) => {
       creatorId: uid,
       profileImg: photoURL,
       nickname: displayName,
-      Downurl : downloadUrl,
-    }
+      Downurl: downloadUrl,
+    };
 
     try {
-    await addDoc(collection(dbService, "comments"), data);
-    comment.value = "";
-    if(path == "main"){getCommentList();} else {getCommentList_mypage()}
-  } catch (error) {
-    alert(error);
-    console.log("error in addDoc:", error);
-  }
-  document.getElementById("posted_img").src = ""
-  localStorage.removeItem('imgDataUrl3')
-  Uploaded = !Uploaded
-    document.getElementById("posted_img").classList.add("noDisplay")
-
-
+      await addDoc(collection(dbService, "comments"), data);
+      comment.value = "";
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
+    } catch (error) {
+      alert(error);
+      console.log("error in addDoc:", error);
+    }
+    document.getElementById("posted_img").src = "";
+    localStorage.removeItem("imgDataUrl3");
+    Uploaded = !Uploaded;
+    document.getElementById("posted_img").classList.add("noDisplay");
   } else {
     let data = {
       text: comment.value,
@@ -80,23 +81,23 @@ export const save_comment = async (event) => {
       creatorId: uid,
       profileImg: photoURL,
       nickname: displayName,
-      Downurl : "",
-    }
+      Downurl: "",
+    };
 
     try {
-    await addDoc(collection(dbService, "comments"), data);
-    comment.value = "";
-    if(path == "main"){getCommentList();} else {getCommentList_mypage()}
-  } catch (error) {
-    alert(error);
-    console.log("error in addDoc:", error);
+      await addDoc(collection(dbService, "comments"), data);
+      comment.value = "";
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
+    } catch (error) {
+      alert(error);
+      console.log("error in addDoc:", error);
+    }
   }
-
-  }
-
-
-}
-
+};
 
 export const onEditing = (event) => {
   // 수정버튼 클릭
@@ -130,8 +131,11 @@ export const update_comment = async (event) => {
   const commentRef = doc(dbService, "comments", id);
   try {
     await updateDoc(commentRef, { text: newComment });
-    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
-
+    if (path == "main") {
+      getCommentList();
+    } else {
+      getCommentList_mypage();
+    }
   } catch (error) {
     alert(error);
   }
@@ -145,7 +149,11 @@ export const delete_comment = async (event) => {
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
-    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
     } catch (error) {
       alert(error);
     }
@@ -450,7 +458,7 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
                      }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
               
                             
-<!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
+<!--                        <span class=" symbols material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
 <!--                        edit-->
 <!--                        </span>-->
 <!--                        <span class="material-symbols-outlined deleteBtn" onclick="delete_comment(event)">-->
@@ -513,11 +521,9 @@ export const getSearchResult = async (event) => {
 };
 
 function toggleMenu() {
-
   let subMenu = document.getElementById("subMenu");
-        subMenu.classList.toggle("open_menu");
-    }
-
+  subMenu.classList.toggle("open_menu");
+}
 
 window.toggleMenu = toggleMenu;
 window.save_comment = save_comment;

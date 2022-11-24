@@ -38,17 +38,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  let imgName = [
+    "mount",
+    "milky_way",
+    "bridge",
+    "cat",
+    "switzerland",
+    "nature",
+    "bangtan",
+    "black_pink",
+  ];
 
-   let imgName = [
-    'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
-     ];
+  let randomNumber = Math.floor(Math.random() * imgName.length);
 
-    let randomNumber = Math.floor(Math.random() * imgName.length);
-
-    document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
-
-})
-
+  document.getElementById("background_image").src =
+    "/images/" + imgName[randomNumber] + ".jpg";
+});
 
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트
 window.onToggle = onToggle;

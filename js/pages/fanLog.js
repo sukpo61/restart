@@ -17,11 +17,11 @@ import {
 import { updateProfile } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
-let Uploaded = false
+let Uploaded = false;
 
 export const post_onFileChange = (event) => {
-  document.getElementById("posted_img").classList.remove("noDisplay")
-  Uploaded = !Uploaded
+  document.getElementById("posted_img").classList.remove("noDisplay");
+  Uploaded = !Uploaded;
   const theFile = event.target.files[0]; // file 객체
   const reader = new FileReader();
   reader.readAsDataURL(theFile); // file 객체를 브라우저가 읽을 수 있는 data URL로 읽음.
@@ -30,23 +30,22 @@ export const post_onFileChange = (event) => {
     const imgDataUrl3 = finishedEvent.currentTarget.result;
     localStorage.setItem("imgDataUrl3", imgDataUrl3);
     document.getElementById("posted_img").src = imgDataUrl3;
-
   };
 };
 
 export const save_comment = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
   let path = window.location.hash.replace("#", "");
   const comment = document.getElementById("comment");
   const { uid, photoURL, displayName } = authService.currentUser;
 
-  if(Uploaded){
-  const imgRef = ref(
-    storageService,
-    `${authService.currentUser.uid}/post_images/${uuidv4()}`
-  );
-  const imgDataUrl3 = localStorage.getItem("imgDataUrl3");
-  let downloadUrl;
+  if (Uploaded) {
+    const imgRef = ref(
+      storageService,
+      `${authService.currentUser.uid}/post_images/${uuidv4()}`
+    );
+    const imgDataUrl3 = localStorage.getItem("imgDataUrl3");
+    let downloadUrl;
     const response = await uploadString(imgRef, imgDataUrl3, "data_url");
     downloadUrl = await getDownloadURL(response.ref);
 
@@ -56,23 +55,25 @@ export const save_comment = async (event) => {
       creatorId: uid,
       profileImg: photoURL,
       nickname: displayName,
-      Downurl : downloadUrl,
-    }
+      Downurl: downloadUrl,
+    };
 
     try {
-    await addDoc(collection(dbService, "comments"), data);
-    comment.value = "";
-    if(path == "main"){getCommentList();} else {getCommentList_mypage()}
-  } catch (error) {
-    alert(error);
-    console.log("error in addDoc:", error);
-  }
-  document.getElementById("posted_img").src = ""
-  localStorage.removeItem('imgDataUrl3')
-  Uploaded = !Uploaded
-    document.getElementById("posted_img").classList.add("noDisplay")
-
-
+      await addDoc(collection(dbService, "comments"), data);
+      comment.value = "";
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
+    } catch (error) {
+      alert(error);
+      console.log("error in addDoc:", error);
+    }
+    document.getElementById("posted_img").src = "";
+    localStorage.removeItem("imgDataUrl3");
+    Uploaded = !Uploaded;
+    document.getElementById("posted_img").classList.add("noDisplay");
   } else {
     let data = {
       text: comment.value,
@@ -80,23 +81,23 @@ export const save_comment = async (event) => {
       creatorId: uid,
       profileImg: photoURL,
       nickname: displayName,
-      Downurl : "",
-    }
+      Downurl: "",
+    };
 
     try {
-    await addDoc(collection(dbService, "comments"), data);
-    comment.value = "";
-    if(path == "main"){getCommentList();} else {getCommentList_mypage()}
-  } catch (error) {
-    alert(error);
-    console.log("error in addDoc:", error);
+      await addDoc(collection(dbService, "comments"), data);
+      comment.value = "";
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
+    } catch (error) {
+      alert(error);
+      console.log("error in addDoc:", error);
+    }
   }
-
-  }
-
-
-}
-
+};
 
 export const onEditing = (event) => {
   // 수정버튼 클릭
@@ -130,8 +131,11 @@ export const update_comment = async (event) => {
   const commentRef = doc(dbService, "comments", id);
   try {
     await updateDoc(commentRef, { text: newComment });
-    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
-
+    if (path == "main") {
+      getCommentList();
+    } else {
+      getCommentList_mypage();
+    }
   } catch (error) {
     alert(error);
   }
@@ -145,7 +149,11 @@ export const delete_comment = async (event) => {
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
-    if(path == "main"){getCommentList();}else {getCommentList_mypage()}
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
     } catch (error) {
       alert(error);
     }
@@ -153,7 +161,7 @@ export const delete_comment = async (event) => {
 };
 
 export const getCommentList = async () => {
-  console.log(authService)
+  console.log(authService);
   let cmtObjList = [];
   const q = query(
     collection(dbService, "comments"),
@@ -172,9 +180,9 @@ export const getCommentList = async () => {
 
   commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
-      const imgemptycheck = cmtObj.Downurl === ""
-      const isOwner = currentUid === cmtObj.creatorId;
-      const temp_html = `
+    const imgemptycheck = cmtObj.Downurl === "";
+    const isOwner = currentUid === cmtObj.creatorId;
+    const temp_html = `
                 <div class="friends_post">
 
                 <div class="friend_post_top">
@@ -182,19 +190,17 @@ export const getCommentList = async () => {
                     <div class="img_and_name">
 
                         <img src="${
-          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-      }">
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
                         <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
+                                ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -214,7 +220,9 @@ export const getCommentList = async () => {
                                 edit
                             </span>
                         </button>
-                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     <button name="${
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -285,11 +293,11 @@ export const getCommentList = async () => {
             </div>
 
 `;
-      const div = document.createElement("div");
-      div.classList.add("mycards");
-      div.innerHTML = temp_html;
-      commnetList.appendChild(div);
-    });
+    const div = document.createElement("div");
+    div.classList.add("mycards");
+    div.innerHTML = temp_html;
+    commnetList.appendChild(div);
+  });
 };
 
 export const getCommentList_mypage = async () => {
@@ -310,9 +318,9 @@ export const getCommentList_mypage = async () => {
   const currentUid = authService.currentUser.uid;
   commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
-    if(cmtObj.creatorId == currentUid) {
+    if (cmtObj.creatorId == currentUid) {
       const isOwner = currentUid === cmtObj.creatorId;
-      const imgemptycheck = cmtObj.Downurl === ""
+      const imgemptycheck = cmtObj.Downurl === "";
 
       const temp_html = `
                 <div class="friends_post">
@@ -321,18 +329,18 @@ export const getCommentList_mypage = async () => {
 
                     <div class="img_and_name">
 
-                        <img src="${cmtObj.profileImg ?? "../assets/blankProfile.webp"}">
+                        <img src="${
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
                              <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
+                                ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -353,7 +361,9 @@ export const getCommentList_mypage = async () => {
                                 edit
                             </span>
                         </button>
-                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     <button name="${
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -429,11 +439,12 @@ export const getCommentList_mypage = async () => {
       div.classList.add("mycards");
       div.innerHTML = temp_html;
       commnetList.appendChild(div);
-    }});
+    }
+  });
 };
 
 export const getCommentList_main_before = async () => {
-  console.log(authService)
+  console.log(authService);
   let cmtObjList = [];
   const q = query(
     collection(dbService, "comments"),
@@ -450,8 +461,8 @@ export const getCommentList_main_before = async () => {
   const commnetList = document.getElementById("comment-list");
   commnetList.innerHTML = "";
   cmtObjList.forEach((cmtObj) => {
-      const imgemptycheck = cmtObj.Downurl === ""
-      const temp_html = `
+    const imgemptycheck = cmtObj.Downurl === "";
+    const temp_html = `
                 <div class="friends_post">
 
                 <div class="friend_post_top">
@@ -459,19 +470,17 @@ export const getCommentList_main_before = async () => {
                     <div class="img_and_name">
 
                         <img src="${
-          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-      }">
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
                         <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
+                                ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -488,11 +497,11 @@ export const getCommentList_main_before = async () => {
                     
                     <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
                      <button name="${
-          cmtObj.id
-      }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
               
                             
-<!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
+<!--                        <span class=" symbols material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
 <!--                        edit-->
 <!--                        </span>-->
 <!--                        <span class="material-symbols-outlined deleteBtn" onclick="delete_comment(event)">-->
@@ -506,7 +515,9 @@ export const getCommentList_main_before = async () => {
 
 
               <div id="post_img">
-                   <img src="${cmtObj.Downurl}" class=${imgemptycheck ? "noDisplay" : ""}>
+                   <img src="${cmtObj.Downurl}" class=${
+      imgemptycheck ? "noDisplay" : ""
+    }>
                    </div>
 
                 <div class="info">
@@ -563,19 +574,17 @@ export const getCommentList_main_before = async () => {
             </div>
 
 `;
-      const div = document.createElement("div");
-      div.classList.add("mycards");
-      div.innerHTML = temp_html;
-      commnetList.appendChild(div);
-    });
+    const div = document.createElement("div");
+    div.classList.add("mycards");
+    div.innerHTML = temp_html;
+    commnetList.appendChild(div);
+  });
 };
 
 function toggleMenu() {
-
   let subMenu = document.getElementById("subMenu");
-        subMenu.classList.toggle("open_menu");
-    }
-
+  subMenu.classList.toggle("open_menu");
+}
 
 window.toggleMenu = toggleMenu;
 window.save_comment = save_comment;

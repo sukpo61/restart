@@ -16,17 +16,18 @@ p{
 }
 
 #img_color{
-    color:#ABC7CD ;
+    color:var(--send-color);
     font-size: 40px;
 }
 
 #send_color{
-    color:#ABC7CD ;
+    color:var(--send-color);
     font-size: 40px;
 }
 
 .botton_color{
-    color: #42636b;
+    background-color: red;
+    color:var(--send-color);
 }
 
 #post_img{
@@ -46,7 +47,9 @@ p{
     object-fit: cover;
     cursor: pointer;
 }
-
+.symbols{
+    background-color: red !important ;
+}
 #profileForm{
     display: flex;
 }
@@ -107,20 +110,29 @@ p{
 
 /*-----------------main---------------*/
 
+body, html{
+    scroll-behavior: smooth;
+  }
+  #button{   
+    position: absolute;
+    top: 76%;
+    left: 82%;
+    position: fixed;
+    display: none;
+  }
+  
 .main{
     display: flex;
     flex-direction: column;
-    background: #E7ECF0;
+    background: var( --main-color);
 }
-
 .noDisplay {
   display: none;
 }
 
-
 /* top-bar */
 nav{
-    background-color: white;
+    background-color: var(--nav-color);
     opacity: 90%;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(50px);
@@ -168,9 +180,11 @@ nav{
       border-radius: 15px;
     }
     .sub-menu{
-        background: #fff;
+        background: var(--subback-color);
+        color: var(--sub-color);
         padding: 20px;
         margin: 10px;
+        border-radius: 20px;
 
     }
     .user-info{
@@ -202,7 +216,7 @@ nav{
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: #525252;
+        color: var(--sub-color)
         margin: 12px 0;
     }
     .sub-menu-link p{
@@ -226,6 +240,65 @@ nav{
         font-weight: 600;
     }
 
+    /*다크모드 버튼*/
+    #dark-btn{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #ccc;
+        width: 45px;
+        border-radius: 15px;
+        padding: 2px 3px;
+        cursor: pointer;
+        display: flex;
+        transition: padding-lift 0.5s, background 0.5s;
+    }
+  
+    #dark-btn span{
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    #dark-btn.dark-btn-on{
+      padding-left: 23px;
+      background: #000;  
+    }
+    
+    :root{
+        --sublink-color:#525252;
+        --sub-color:#000;
+        --subback-color:#fff;
+        --send-color:#ABC7CD ;
+        --my_postcolor:#000;
+        --my_postback:#fff;
+        --top_box-color:#efefef;
+        --centerback-color:#efefef;
+        --main-color:#efefef;
+        --body-color:#efefef;
+        --nav-color:rgba(255, 255, 255, 0.75);
+        
+    }
+    .dark-theme{  
+        --sublink-color:#fff;
+        --sub-color:#fff;
+        --subback-color:#212121;
+        --send-color:#fff ;
+        --my_postcolor:#FFF;
+        --my_postback:#212121;
+        --top_box-color:#0f0f0f;
+        --centerback-color:#0f0f0f;
+        --main-color:#0f0f0f;
+        --body-color:#0f0f0f;
+        --nav-color:#0f0f0f;
+    
+    }
+    body{
+        background-color: var(--body-color);
+        transition: backgroud 0.3s;
+    }
 /* top-bar */
 
 
@@ -234,7 +307,7 @@ nav{
     width: 45%;
     height: auto;
     padding: 0;
-    background: #E7ECF0;
+    background: var(--centerback-color);
     margin : 0 auto;
 }
 
@@ -252,6 +325,7 @@ nav{
 }
 
 .top_box{
+    background: var(--top_box-color);
     padding: 0 50px;
 }
 
@@ -272,11 +346,14 @@ nav{
     font-size: 20px;
 }
 
+.my_post{
+    background-color: var(--my_postback);
+    color: var(--my_postcolor);
 
+}
 .main .center .my_post{
     width: 100%;
     height: auto;
-    background: #fff;
     padding: 10px 15px;
     border-radius: 12px;
     box-shadow: 0 1px 8px rgba(0,0,0,0.2);
@@ -330,34 +407,14 @@ nav{
 }
 
 .main .center .my_post .post_bottom .post_icon{
+    background-color: var(--my_postback);
     display: flex;
     align-items: center;
     padding: 0 5px 0 40px;
     cursor: pointer;
 }
 
-.main .center .my_post .post_bottom .post_icon:hover{
-    background: #efefef;
-    border-radius: 8px;
-}
 
-.main .center .my_post .post_bottom .post_icon i.red{
-    font-size: 23px;
-    color: red;
-    margin-right: 8px;
-}
-
-.main .center .my_post .post_bottom .post_icon i.green{
-    font-size: 23px;
-    color: #27cc37;
-    margin-right: 8px;
-}
-
-.main .center .my_post .post_bottom .post_icon i.yellow{
-    font-size: 23px;
-    color: #f7b928;
-    margin-right: 8px;
-}
 
 .main .center .room{
     width: 100%;
@@ -406,12 +463,11 @@ nav{
 
 .main .center .friends_post{
     margin-top: 20px;
-
     width: 100%;
     height: auto;
-    background: #fff;
+    background: var(--my_postback);
     padding: 10px 15px;
-    border-radius: 7px;
+    border-radius: 10px;
     box-shadow: 0 1px 8px rgba(0,0,0,0.2);
 }
 
@@ -448,6 +504,7 @@ nav{
 
 
 .friends_name{
+    color: var(--my_postcolor);
     font-size: 17px;
     font-weight: 400;
     cursor: pointer;
@@ -472,6 +529,7 @@ nav{
 .main .center .friends_post .friend_post_top .menu{
     width: 35px;
     height: 100px;
+    
 
 }
 

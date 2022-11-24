@@ -1,146 +1,89 @@
- <div class="main">
-
-       <nav>
-                <img src="image/logo.png" class="logo" onclick="goTomain()">
-
-                <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
-
-                <div class="sub-menu-wrap" id="subMenu">
-                    <div class="sub-menu">
-                        <div class="user-info">
-                            <img src="image/user.png" id="dropdown_profile">
-
-                        </div>
-
-
-                        <div id="nickname">
-                            <h3>Juno</h3>
-                        </div>
-
-                         <div id="dropdown_email">
-                            <h3>Juno</h3>
-                        </div>
-
-
-
-                        <hr>
-
-                        <a href="#" class="sub-menu-link">
-                            <img src="image/profile.png">
-                            <p>Edit profile</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link" onclick="logout()">
-                            <img src="image/logout.png">
-                            <p>Logout</p>
-                            <span></span>
-                        </a>
-                    </div>
+<div class="main">
+    <nav>
+        <img src="image/logo.png" class="logo" onclick="goTomain()">
+        <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <div id="dark-btn">
+                    <span></span>
                 </div>
+                <div class="user-info">
 
-            </nav>
-        <!------------center---------------------->
-
-        <div class="center">
-
-
-
-            <div class="top_box">
-                    <form id="profileForm" onsubmit="changeProfile(event)">
-                            <label id="top_imgLabel" for="top_imgInput">
-                              <img src="image/user.png" id="mypage_profile" />
-
-                              <input
-                                onchange="onFileChange(event)"
-                                id="top_imgInput"
-                                type="file"
-                                accept="images/*"
-                                class="noDisplay"
-                              />
-                            </label>
-                        <div class="profile_input">
-                            <div>
-                              <input
-                                      class="form-control"
-                                id="profileNickname"
-                                type="text"
-                                placeholder="현재 닉네임"
-                                value=""
-                              />
-                            </div>
-                            </br>
-                            <input id="profileBtn" type="submit" value="프로필 변경" />
-                        </div>
-                          </form>
-
-                          <div class="my_info">
-                            <p class="email" id="mypage_email">example@.com</p>
-                            <p class="name" id="mypage_nickname">Nickname</p>
-      </div>
-
-            </div>
-
-
-            <div class="my_post">
-
-                <div class="post_top">
-
-                    <img src="image/profile.png" id="post_top_profile">
-                    <input class="form-control"
-                    placeholder="Leave a comment here"
-                    id="comment"
-                     >
-
+                    <img src="image/user.png" id="dropdown_profile">
                 </div>
-
+                <div id="nickname">
+                    <h3>Juno</h3>
+                </div>
+                <div id="dropdown_email">
+                    <h3>Juno</h3>
+                </div>
                 <hr>
-
-                <div class="post_bottom">
-
-
-                 <label id="imgLabel" for="imgInput">
-
-                                <span class="material-symbols-outlined" id="img_color">
-                                    image
-                                    </span>
-                                <span>
-                                    image
-                                </span>
-
-
-
-                              <input
-                                onchange="post_onFileChange(event)"
-                                id="imgInput"
-                                type="file"
-                                accept="images/*"
-                                class="noDisplay"
-                              />
-                            </label>
-
-
-                        <div class="profile_input">
-
-
-                             <button onclick="save_comment(event)" type="submit" class="post_icon">
+                <a href="#" class="sub-menu-link">
+                    <img src="image/profile.png">
+                    <p>Edit profile</p>
+                    <span></span>
+                </a>
+                <a href="#" class="sub-menu-link" onclick="logout()">
+                    <img src="image/logout.png">
+                    <p>Logout</p>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!------------center---------------------->
+    <div class="center">
+        <div class="top_box">
+            <form id="profileForm" onsubmit="changeProfile(event)">
+                <label id="top_imgLabel" for="top_imgInput">
+                    <img src="image/user.png" id="mypage_profile" />
+                    <input onchange="onFileChange(event)" id="top_imgInput" type="file" accept="images/*"
+                        class="noDisplay" />
+                </label>
+                <div class="profile_input">
+                    <div>
+                        <input class="form-control" id="profileNickname" type="text" placeholder="현재 닉네임" value="" />
+                    </div>
+                    </br>
+                    <input id="profileBtn" type="submit" value="프로필 변경" />
+                </div>
+            </form>
+            <div class="my_info">
+                <p class="email" id="mypage_email">example@.com</p>
+                <p class="name" id="mypage_nickname">Nickname</p>
+            </div>
+        </div>
+        <div class="my_post">
+            <div class="post_top">
+                <img src="image/profile.png" id="post_top_profile">
+                <input class="form-control" placeholder="Leave a comment here" id="comment">
+            </div>
+            <hr>
+            <div class="post_bottom">
+                <label id="imgLabel" for="imgInput">
+                    <span class="material-symbols-outlined" id="img_color">
+                        image
+                    </span>
+                    <span>
+                        image
+                    </span>
+                    <input onchange="post_onFileChange(event)" id="imgInput" type="file" accept="images/*"
+                        class="noDisplay" />
+                </label>
+                <div class="profile_input">
+                    <button onclick="save_comment(event)" type="submit" class="post_icon">
                         <span class="material-symbols-outlined" id="send_color">
                             send
-                            </span>
+                        </span>
                     </button>
-
-
-                        </div>
-
-                </div>
-                <div class="thumnail">
-                    <img src="" id="posted_img" class="noDisplay">
                 </div>
             </div>
-
-
-            <div id="comment-list">
-
-                <div class="friends_post">
+            <div class="thumnail">
+                <img src="" id="posted_img" class="noDisplay">
+            </div>
+        </div>
+        <div id="comment-list">
+            <div class="friends_post">
 
                 <div class="friend_post_top">
 
@@ -151,9 +94,9 @@
                         <div class="comment_box">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                Senuda De Silva
-                            </span>
-                            <span class="time">16h.</span>
+                                    Senuda De Silva
+                                </span>
+                                <span class="time">16h.</span>
                             </div>
                             <div><span>답글내용</span></div>
 
@@ -165,10 +108,10 @@
                     <div class="menu">
 
                         <span class="material-symbols-outlined">
-                        edit
+                            edit
                         </span>
                         <span class="material-symbols-outlined">
-                        delete
+                            delete
                         </span>
 
                     </div>
@@ -231,21 +174,9 @@
                 </div>
 
             </div>
-            </div>
-
-
-
-
-
-            <div class="loard">
-                <button>Loard More</button>
-            </div>
-
-
-
-
         </div>
-
-
-
+        <div class="loard">
+            <button>Loard More</button>
+        </div>
     </div>
+</div>

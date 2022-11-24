@@ -1,7 +1,7 @@
 import { handleAuth, onToggle, logout } from "./pages/auth.js";
 import { changeProfile, onFileChange, toggleEdit } from "./pages/profile.js";
 import { socialLogin } from "./pages/auth.js";
-import { handleLocation, goTomain, goToLogin } from "./router.js";
+import { handleLocation, goTomain, goToLogin, darkBtnclick } from "./router.js";
 import { authService } from "./firebase.js";
 import {
   save_comment,
@@ -28,12 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // 로그인 상태에서는 로그인 화면으로 되돌아갈 수 없게 설정
         window.location.replace("#main");
       }
-    } else {
-      // 로그아웃 상태이므로 로그인 화면으로 강제 이동
-      if (hash === "#main_before") {
-        window.location.replace("#main_before");
-      }else{window.location.replace("#login")}
     }
+    // else {
+    //   // 로그아웃 상태이므로 로그인 화면으로 강제 이동
+    //   if (hash === "") {
+    //     window.location.replace("#main_before");
+    //   }
+    // }
   });
 });
 
@@ -73,3 +74,5 @@ window.goToLogin = goToLogin;
 window.post_onFileChange = post_onFileChange;
 window.getSearchResult = getSearchResult;
 window.toggleEdit = toggleEdit;
+window.darkBtnclick = darkBtnclick;
+

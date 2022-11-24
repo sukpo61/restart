@@ -103,6 +103,13 @@ window.addEventListener("hashchange", handleLocation);
 // 첫 랜딩 또는 새로고침 시 처리
 document.addEventListener("DOMContentLoaded", handleLocation);
 
+var darkBtn = document.getElementById("dark-btn");
+
+
+export const darkBtnclick = () => {
+      darkBtn.classList.toggle("dark-btn-on");
+      document.body.classList.toggle("dark-theme");
+    };
 
 
 // const route = (event) => {

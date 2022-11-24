@@ -6,13 +6,13 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-s
 
 // 아래 데이터는 본인의 Firebase 프로젝트 설정에서 확인할 수 있습니다.
 const firebaseConfig = {
- apiKey: "AIzaSyAeS1kojltgLk6ge7yJVRKupcxXVNDLdp0",
-  authDomain: "test2-fbd95.firebaseapp.com",
-  projectId: "test2-fbd95",
-  storageBucket: "test2-fbd95.appspot.com",
-  messagingSenderId: "25595417861",
-  appId: "1:25595417861:web:a5d3098b463e005d00d36c",
-  measurementId: "G-NBXNWC2RBY"
+apiKey: "AIzaSyAs-GKzdOeSjNjKu_yY9DwAdswpdggty70",
+  authDomain: "test3-67dfa.firebaseapp.com",
+  projectId: "test3-67dfa",
+  storageBucket: "test3-67dfa.appspot.com",
+  messagingSenderId: "276295315112",
+  appId: "1:276295315112:web:1e1d96c2652891c2c51c9d",
+  measurementId: "G-YQJPLQDM8Z"
 };
 
 // Initialize Firebase
@@ -54,4 +54,14 @@ export const storageService = getStorage(app);
 //   storageBucket: "test2-fbd95.appspot.com",
 //   messagingSenderId: "25595417861",
 //   appId: "1:25595417861:web:a5d3098b463e005d00d36c",
-//   measurementId: "G-NBXNWC2RBY"
+// //   measurementId: "G-NBXNWC2RBY"
+//
+// 내코드 3
+//
+// apiKey: "AIzaSyAs-GKzdOeSjNjKu_yY9DwAdswpdggty70",
+//   authDomain: "test3-67dfa.firebaseapp.com",
+//   projectId: "test3-67dfa",
+//   storageBucket: "test3-67dfa.appspot.com",
+//   messagingSenderId: "276295315112",
+//   appId: "1:276295315112:web:1e1d96c2652891c2c51c9d",
+//   measurementId: "G-YQJPLQDM8Z"

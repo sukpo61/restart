@@ -8,7 +8,8 @@ import {
   update_comment,
   onEditing,
   delete_comment,
-  post_onFileChange
+  post_onFileChange,
+    getSearchResult
 } from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
@@ -65,4 +66,4 @@ window.toggleMenu = toggleMenu; //프로필 드롭다운 메뉴 기능 관련
 window.goToLogin = goToLogin;
 // test
 window.post_onFileChange = post_onFileChange;
-
+window.getSearchResult = getSearchResult;

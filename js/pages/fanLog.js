@@ -152,9 +152,11 @@ export const delete_comment = async (event) => {
   }
 };
 
-export const getCommentList = async () => {
-  console.log(authService)
+
+export const getCommentList = async (searchContent, searchList) => {
   let cmtObjList = [];
+  let showList = [];
+
   const q = query(
     collection(dbService, "comments"),
     orderBy("createdAt", "desc")
@@ -167,14 +169,24 @@ export const getCommentList = async () => {
     };
     cmtObjList.push(commentObj);
   });
+
+  //검색어, 검색어를 포함하는 결과리스트 콘솔값
+
+  if (searchContent != undefined && searchContent.length != 0) {
+    showList = searchList;
+  } else {
+    showList = cmtObjList;
+  }
+
   const commnetList = document.getElementById("comment-list");
   const currentUid = authService.currentUser.uid;
-
   commnetList.innerHTML = "";
-  cmtObjList.forEach((cmtObj) => {
+  // debugger;
+  showList.forEach((cmtObj) => {
+    // debugger;
       const imgemptycheck = cmtObj.Downurl === ""
-      const isOwner = currentUid === cmtObj.creatorId;
-      const temp_html = `
+    const isOwner = currentUid === cmtObj.creatorId;
+    const temp_html = `
                 <div class="friends_post">
 
                 <div class="friend_post_top">
@@ -182,19 +194,17 @@ export const getCommentList = async () => {
                     <div class="img_and_name">
 
                         <img src="${
-          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-      }">
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
                         <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
+                                ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -214,7 +224,9 @@ export const getCommentList = async () => {
                                 edit
                             </span>
                         </button>
-                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     <button name="${
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -285,15 +297,18 @@ export const getCommentList = async () => {
             </div>
 
 `;
-      const div = document.createElement("div");
-      div.classList.add("mycards");
-      div.innerHTML = temp_html;
-      commnetList.appendChild(div);
-    });
+    const div = document.createElement("div");
+    div.classList.add("mycards");
+    // debugger;
+    div.innerHTML = temp_html;
+    commnetList.appendChild(div);
+  });
 };
 
-export const getCommentList_mypage = async () => {
+export const getCommentList_mypage = async (searchContent, searchList) => {
   let cmtObjList = [];
+  let showList = [];
+
   const q = query(
     collection(dbService, "comments"),
     orderBy("createdAt", "desc")
@@ -306,14 +321,33 @@ export const getCommentList_mypage = async () => {
     };
     cmtObjList.push(commentObj);
   });
+
+  //검색어, 검색어를 포함하는 결과리스트 콘솔값
+  // console.log(
+  //   "여기는 getCommentList_mypage 함수 안",
+  //   "searchContent :",
+  //   typeof searchContent,
+  //   searchContent,
+  //   "searchList :",
+  //   typeof searchList,
+  //   searchList,
+  //   "cmtObjList :",
+  //   cmtObjList
+  // );
+
+  if (searchContent != undefined && searchContent.length != 0) {
+    showList = searchList;
+  } else {
+    showList = cmtObjList;
+  }
+
   const commnetList = document.getElementById("comment-list");
   const currentUid = authService.currentUser.uid;
   commnetList.innerHTML = "";
-  cmtObjList.forEach((cmtObj) => {
-    if(cmtObj.creatorId == currentUid) {
+  showList.forEach((cmtObj) => {
+    if (cmtObj.creatorId == currentUid) {
       const isOwner = currentUid === cmtObj.creatorId;
       const imgemptycheck = cmtObj.Downurl === ""
-
       const temp_html = `
                 <div class="friends_post">
 
@@ -321,18 +355,18 @@ export const getCommentList_mypage = async () => {
 
                     <div class="img_and_name">
 
-                        <img src="${cmtObj.profileImg ?? "../assets/blankProfile.webp"}">
+                        <img src="${
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
                              <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
+                                ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -353,7 +387,9 @@ export const getCommentList_mypage = async () => {
                                 edit
                             </span>
                         </button>
-                     <button name="${cmtObj.id}" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     <button name="${
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -429,12 +465,15 @@ export const getCommentList_mypage = async () => {
       div.classList.add("mycards");
       div.innerHTML = temp_html;
       commnetList.appendChild(div);
-    }});
+    }
+  });
 };
 
-export const getCommentList_main_before = async () => {
-  console.log(authService)
+export const getCommentList_main_before = async (searchContent, searchList) => {
+  // console.log(authService);
   let cmtObjList = [];
+  let showList = [];
+
   const q = query(
     collection(dbService, "comments"),
     orderBy("createdAt", "desc")
@@ -447,11 +486,30 @@ export const getCommentList_main_before = async () => {
     };
     cmtObjList.push(commentObj);
   });
+
+  // console.log(
+  //   "여기는 getCommentList_main_before 함수 안",
+  //   "searchContent :",
+  //   typeof searchContent,
+  //   searchContent,
+  //   "searchList :",
+  //   typeof searchList,
+  //   searchList,
+  //   "cmtObjList :",
+  //   cmtObjList
+  // );
+
+  if (searchContent != undefined && searchContent.length != 0) {
+    showList = searchList;
+  } else {
+    showList = cmtObjList;
+  }
+
   const commnetList = document.getElementById("comment-list");
+  const imgemptycheck = cmtObj.Downurl === ""
   commnetList.innerHTML = "";
-  cmtObjList.forEach((cmtObj) => {
-      const imgemptycheck = cmtObj.Downurl === ""
-      const temp_html = `
+  showList.forEach((cmtObj) => {
+    const temp_html = `
                 <div class="friends_post">
 
                 <div class="friend_post_top">
@@ -459,19 +517,17 @@ export const getCommentList_main_before = async () => {
                     <div class="img_and_name">
 
                         <img src="${
-          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-      }">
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
                         <div class="comment_contents">
                             <div class="name_and_time">
                                 <span class="friends_name">
-                                ${
-          cmtObj.nickname ?? "닉네임 없음"
-      }
+                                ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -488,8 +544,8 @@ export const getCommentList_main_before = async () => {
                     
                     <button onclick="onEditing(event)" class="editBtn btn btn-dark">수정</button>
                      <button name="${
-          cmtObj.id
-      }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn btn btn-dark">삭제</button>
               
                             
 <!--                        <span class="material-symbols-outlined editBtn" onclick="onEditing(event)"> -->
@@ -505,8 +561,8 @@ export const getCommentList_main_before = async () => {
 
 
 
-              <div id="post_img">
-                   <img src="${cmtObj.Downurl}" class=${imgemptycheck ? "noDisplay" : ""}>
+                   <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
+                   <img src="${cmtObj.Downurl}">
                    </div>
 
                 <div class="info">
@@ -563,11 +619,45 @@ export const getCommentList_main_before = async () => {
             </div>
 
 `;
-      const div = document.createElement("div");
-      div.classList.add("mycards");
-      div.innerHTML = temp_html;
-      commnetList.appendChild(div);
-    });
+    const div = document.createElement("div");
+    div.classList.add("mycards");
+    div.innerHTML = temp_html;
+    commnetList.appendChild(div);
+  });
+};
+
+export const getSearchResult = async (event) => {
+  event.preventDefault();
+  const searchContent = document.getElementById("searchInput").value;
+
+  let searchList = [];
+  const q = query(
+    // db.collection("컬렉션 이름").whereField("필드명", arrayContains: "포마")
+    collection(dbService, "comments"),
+    // where("text", "array-contains", searchContent),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const commentObj = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    if (searchContent || searchContent.length > 0) {
+      if (commentObj["text"].includes(searchContent)) {
+        searchList.push(commentObj);
+      }
+    }
+  });
+
+  getCommentList_main_before(searchContent, searchList);
+
+  if (window.location.hash === "#mypage") {
+    getCommentList_mypage(searchContent, searchList);
+    return;
+  }
+
+  getCommentList(searchContent, searchList);
 };
 
 function toggleMenu() {

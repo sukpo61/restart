@@ -105,6 +105,19 @@ p{
 
 }
 
+.top_toggle_img{
+    width: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#searchForm{
+    width: 35%;
+}
+
+.searchButton{
+    margin-left: 10px !important;
+}
 /*-----------------main---------------*/
 
 .main{

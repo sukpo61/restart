@@ -63,11 +63,22 @@ export const handleLocation = async () => {
          document.getElementById("mypage_email").textContent =
              authService.currentUser.email ?? "계정";
 
+          document.getElementById("nickname").textContent =
+             authService.currentUser.displayName ?? "닉네임 없음";
+
+                   document.getElementById("dropdown_profile").src =
+             authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+
          document.getElementById("top_bar_image").src =
              authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
 
          document.getElementById("post_top_profile").src =
              authService.currentUser.photoURL ?? "../assets/blankProfile.webp";
+
+                  document.getElementById("dropdown_email").textContent =
+             authService.currentUser.email ?? "계정";
+
 
          getCommentList_mypage()
      }

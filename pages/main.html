@@ -5,7 +5,29 @@
     <nav>
                 <img src="image/logo.png" class="logo" onclick="goTomain()">
 
-                <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
+            <form id="searchForm" onsubmit="getSearchResult(event)">
+      <div class="mx-auto input-group">
+        <input
+          id="searchInput"
+          name="q"
+          type="text"
+          class="form-control rounded-pill"
+          placeholder="Search"
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button type="submit" form="searchForm" class="searchButton"><span class="material-symbols-outlined">
+search
+</span></button>
+      </div>
+    </form>
+
+        <div class="top_toggle_img">
+
+           <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
+
+        </div>
+
 
                 <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">

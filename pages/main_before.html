@@ -3,8 +3,8 @@
             <nav>
                 <img src="image/logo.png" class="logo" >
 
-                    <form id="searchForm" onsubmit="getSearchResult(event)">
-      <div class="mx-auto input-group mb-3">
+            <form id="searchForm" onsubmit="getSearchResult(event)">
+      <div class="mx-auto input-group">
         <input
           id="searchInput"
           name="q"
@@ -14,12 +14,20 @@
           aria-label="Recipient's username"
           aria-describedby="button-addon2"
         />
-        <button type="submit" form="searchForm">검색</button>
+        <button type="submit" form="searchForm" class="searchButton"><span class="material-symbols-outlined">
+search
+</span></button>
       </div>
     </form>
 
 
-                <button onclick="goToLogin()">로그인</button>
+                <div class="main_before_login_button_box">
+
+                   <button onclick="goToLogin()" class="main_before_login_button"><span class="login_text">로그인</span><span class="material-symbols-outlined">
+login
+</span></button>
+                </div>
+
                 <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
@@ -56,16 +64,30 @@
             </nav>
 
         <!------------center---------------------->
+        <div class="main_top_box mar_b_30">
+                <div class="grid_item">
+                     <img src="/images/nam.png" class="solo_profile">
+                </div>
+                <div class="grid_item">
+                     <img src="/images/hwang.png " class="solo_profile">
+                </div>
+                <div class="grid_item">
+                     <img src="/images/go.png " class="solo_profile">
+                </div>
+                <div class="grid_item">
+                     <img src="/images/cha.png" class="solo_profile">
+                </div>
+                <div class="grid_item">
+                     <img src="/images/ye.png" class="solo_profile">
+                </div>
+
+                    <!-- /* 로고자리. 중앙정렬 해주세요, 로고 말고 다른거 들어가도 괜찮을듯 */ -->
+
+            </div>
 
         <div class="center">
 
 
-            <div class="top_box">
-
-                    <img src=" ">
-                    <!-- /* 로고자리. 중앙정렬 해주세요, 로고 말고 다른거 들어가도 괜찮을듯 */ -->
-
-            </div>
 
             <div id="comment-list">
 

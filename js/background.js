@@ -80,19 +80,19 @@ $(function (){
 //         });
 
 
-document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => {
+//
+//    let imgName = [
+//     'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
+//      ];
+//
+//     let randomNumber = Math.floor(Math.random() * imgName.length);
+//
+//     document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
+//
+//
+// }
 
-   let imgName = [
-    'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
-     ];
 
-    let randomNumber = Math.floor(Math.random() * imgName.length);
-
-    document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
-
-
-}
-
-)
 
 

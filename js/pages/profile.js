@@ -54,3 +54,20 @@ export const onFileChange = (event) => {
 
   };
 };
+
+export function toggleEdit() {
+  let prof_nickname = document.getElementById("profileNickname");
+  let prof_changeBtn = document.getElementById("profileBtn");
+
+  if (prof_nickname.style.display === "none") {
+    prof_nickname.style.display = "block";
+  } else {
+    prof_nickname.style.display = "none";
+  }
+
+  if (prof_changeBtn.style.display === "none") {
+    prof_changeBtn.style.display = "block";
+  } else {
+    prof_changeBtn.style.display = "none";
+  }
+}

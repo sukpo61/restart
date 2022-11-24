@@ -1,5 +1,5 @@
 import { handleAuth, onToggle, logout } from "./pages/auth.js";
-import { changeProfile, onFileChange } from "./pages/profile.js";
+import { changeProfile, onFileChange, toggleEdit } from "./pages/profile.js";
 import { socialLogin } from "./pages/auth.js";
 import { handleLocation, goTomain, goToLogin } from "./router.js";
 import { authService } from "./firebase.js";
@@ -37,17 +37,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-
-   let imgName = [
-    'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
-     ];
-
-    let randomNumber = Math.floor(Math.random() * imgName.length);
-
-    document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
-
-})
+// document.addEventListener("DOMContentLoaded", () => {
+//
+//    let imgName = [
+//     'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
+//      ];
+//
+//     let randomNumber = Math.floor(Math.random() * imgName.length);
+//
+//     document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
+//
+// })
 
 
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트
@@ -67,3 +67,4 @@ window.goToLogin = goToLogin;
 // test
 window.post_onFileChange = post_onFileChange;
 window.getSearchResult = getSearchResult;
+window.toggleEdit = toggleEdit;

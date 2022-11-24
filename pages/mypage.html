@@ -3,8 +3,8 @@
        <nav>
                 <img src="image/logo.png" class="logo" onclick="goTomain()">
 
-               <form id="searchForm" onsubmit="getSearchResult(event)">
-      <div class="mx-auto input-group mb-3">
+            <form id="searchForm" onsubmit="getSearchResult(event)">
+      <div class="mx-auto input-group">
         <input
           id="searchInput"
           name="q"
@@ -14,43 +14,46 @@
           aria-label="Recipient's username"
           aria-describedby="button-addon2"
         />
-        <button type="submit" form="searchForm">검색</button>
+        <button type="submit" form="searchForm" class="searchButton"><span class="material-symbols-outlined">
+search
+</span></button>
       </div>
     </form>
 
 
-                <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
+        <div class="top_toggle_img">
+
+           <img src="image/user.png" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
+
+        </div>
 
                 <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">
-                       <div class="user-info">
+                        <div class="user-info">
                             <img src="image/user.png" id="dropdown_profile">
 
                         </div>
 
-
-                        <div id="nickname">
-                            <h3>Juno</h3>
+                        <div class="dropdown_info">
+                         <div id="nickname" class="mar_15">
+                        </div>
+                         <div id="dropdown_email" class="mar_10">
                         </div>
 
-                         <div id="dropdown_email">
-                            <h3>Juno</h3>
+
                         </div>
 
 
 
                         <hr>
-
-                        <a href="#mypage" class="sub-menu-link" onclick="route(event)">
-                            <img src="image/profile.png">
-                            <p>Edit profile</p>
-                            <span></span>
-                        </a>
+                        <div class="dropdown_link">
                         <a href="#" class="sub-menu-link" onclick="logout()">
                             <img src="image/logout.png">
                             <p>Logout</p>
                             <span></span>
                         </a>
+                        </div>
+
                     </div>
                 </div>
 
@@ -61,7 +64,7 @@
 
 
 
-            <div class="top_box">
+            <div class="my_top_box">
                     <form id="profileForm" onsubmit="changeProfile(event)">
                             <label id="top_imgLabel" for="top_imgInput">
                               <img src="image/user.png" id="mypage_profile" />
@@ -76,8 +79,17 @@
                             </label>
                         <div class="profile_input">
                             <div>
-                              <input
-                                      class="form-control"
+                                <div class="edit_icon_box">
+                                  <img
+                                  id="edit_icon"
+                                  src="../assets/edit_FILL1_wght400_GRAD0_opsz48 1.png"
+                                  alt="수정하기"
+                                  onclick="toggleEdit()"
+                                />
+
+                                </div>
+
+                              <input class="form-control"
                                 id="profileNickname"
                                 type="text"
                                 placeholder="현재 닉네임"

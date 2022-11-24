@@ -243,56 +243,6 @@ export const getCommentList = async (searchContent, searchList) => {
                    <img src="${cmtObj.Downurl}">
                    </div>
 
-                <div class="info">
-
-                    <div class="emoji_img">
-                        <img src="image/like.png">
-
-                        <p>You, Charith Disanayaka and 25K others</p>
-                    </div>
-
-                    <div class="comment">
-                        <p>421 Comments</p>
-
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <div class="like">
-
-                    <div class="like_icon">
-                        <i class="fa-solid fa-thumbs-up activi"></i>
-                        <p>Like</p>
-                    </div>
-
-                    <div class="like_icon">
-                        <i class="fa-solid fa-message"></i>
-                        <p>Comments</p>
-                    </div>
-
-
-
-                </div>
-
-                <hr>
-
-                <div class="comment_warpper">
-
-                    <img src="image/profile.png">
-                    <div class="circle"></div>
-
-                    <div class="comment_search">
-
-                        <input type="text" placeholder="Write a comment">
-                        <i class="fa-regular fa-face-smile"></i>
-                        <i class="fa-solid fa-camera"></i>
-                        <i class="fa-regular fa-note-sticky"></i>
-
-                    </div>
-
-                </div>
 
             </div>
 
@@ -407,56 +357,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                    </div>
                 
 
-                <div class="info">
-
-                    <div class="emoji_img">
-                        <img src="image/like.png">
-
-                        <p>You, Charith Disanayaka and 25K others</p>
-                    </div>
-
-                    <div class="comment">
-                        <p>421 Comments</p>
-
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <div class="like">
-
-                    <div class="like_icon">
-                        <i class="fa-solid fa-thumbs-up activi"></i>
-                        <p>Like</p>
-                    </div>
-
-                    <div class="like_icon">
-                        <i class="fa-solid fa-message"></i>
-                        <p>Comments</p>
-                    </div>
-
-
-
-                </div>
-
-                <hr>
-
-                <div class="comment_warpper">
-
-                    <img src="image/profile.png">
-                    <div class="circle"></div>
-
-                    <div class="comment_search">
-
-                        <input type="text" placeholder="Write a comment">
-                        <i class="fa-regular fa-face-smile"></i>
-                        <i class="fa-solid fa-camera"></i>
-                        <i class="fa-regular fa-note-sticky"></i>
-
-                    </div>
-
-                </div>
+              
 
             </div>
 
@@ -506,9 +407,10 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
   }
 
   const commnetList = document.getElementById("comment-list");
-  const imgemptycheck = cmtObj.Downurl === ""
   commnetList.innerHTML = "";
   showList.forEach((cmtObj) => {
+    const imgemptycheck = cmtObj.Downurl === ""
+
     const temp_html = `
                 <div class="friends_post">
 
@@ -565,57 +467,7 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
                    <img src="${cmtObj.Downurl}">
                    </div>
 
-                <div class="info">
-
-                    <div class="emoji_img">
-                        <img src="image/like.png">
-
-                        <p>You, Charith Disanayaka and 25K others</p>
-                    </div>
-
-                    <div class="comment">
-                        <p>421 Comments</p>
-
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <div class="like">
-
-                    <div class="like_icon">
-                        <i class="fa-solid fa-thumbs-up activi"></i>
-                        <p>Like</p>
-                    </div>
-
-                    <div class="like_icon">
-                        <i class="fa-solid fa-message"></i>
-                        <p>Comments</p>
-                    </div>
-
-
-
-                </div>
-
-                <hr>
-
-                <div class="comment_warpper">
-
-                    <img src="image/profile.png">
-                    <div class="circle"></div>
-
-                    <div class="comment_search">
-
-                        <input type="text" placeholder="Write a comment">
-                        <i class="fa-regular fa-face-smile"></i>
-                        <i class="fa-solid fa-camera"></i>
-                        <i class="fa-regular fa-note-sticky"></i>
-
-                    </div>
-
-                </div>
-
+              
             </div>
 
 `;

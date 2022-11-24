@@ -91,12 +91,19 @@ p{
     display: flex;
     align-items: center;
     cursor: pointer;
-
 }
+
 #imgLabel{
     display: flex;
     align-items: center;
     cursor: pointer;
+    padding-right: 5px;
+
+}
+
+#imgLabel:hover{
+    background: #efefef;
+    border-radius: 8px;
 
 }
 .thumnail{
@@ -117,6 +124,64 @@ p{
 
 .searchButton{
     margin-left: 10px !important;
+}
+
+#profileNickname {
+    margin-top: 10px;
+  display: none;
+}
+
+#profileBtn {
+  display: none;
+}
+.edit_icon_box{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#edit_icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+    margin-right: 0;
+}
+
+.main_before_login_button_box{
+    width: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.main_before_login_button{
+    display: flex;
+    align-items: center;
+}
+.login_text{
+    margin-right: 10px;
+}
+
+.solo_profile{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.grid_item{
+    border-radius: 12px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.grid_item:hover{
+    width: 1.2fr;
+}
+
+.mar_b_30{
+    margin-bottom: 30px;
 }
 /*-----------------main---------------*/
 
@@ -166,10 +231,25 @@ nav{
         object-fit: cover;
     }
 
+    .dropdown_info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .dropdown_link{
+        display: flex;
+        justify-content: center;
+                flex-direction: column;
+
+    }
+
     .sub-menu-wrap{
+        border-radius: 12px;
         position: absolute;
         top: 100%;
-        right: 2%;
+        right: 1%;
         width: 320px;
         max-height: 0px;
         overflow: hidden;
@@ -181,6 +261,8 @@ nav{
       border-radius: 15px;
     }
     .sub-menu{
+        border-radius: 12px;
+
         background: #fff;
         padding: 20px;
         margin: 10px;
@@ -209,7 +291,7 @@ nav{
         height: 1px;
         width: 100%;
         background: #ccc;
-        margin : 50px 0 10px;
+        margin : 20px 0 10px;
     }
     .sub-menu-link{
         display: flex;
@@ -223,7 +305,7 @@ nav{
     }
     .sub-menu-link img{
         width: 40px;
-        background: #e5e5e5
+        background: #e5e5e5;
         border-radius:50%;
         padding:8px;
         margin-right: 15px;
@@ -255,33 +337,43 @@ nav{
     width: 0;
 }
 
-.main .center .top_box{
+.main_top_box{
+    margin-top: 150px;
+    width: 100%;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 0 28%;
+    grid-gap: 20px;
+}
+
+.my_top_box{
     margin-top: 150px;
     width: 100%;
     height: 260px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
 .top_box{
-    padding: 0 50px;
+
 }
 
-.main .center .top_box img{
+.main .center .my_top_box img{
     width: 180px;
     border-radius: 50%;
     margin-right: 50px;
 }
 
-.main .center .top_box .email {
+.main .center .my_top_box .email {
     font-weight: bold;
     font-size: 25px;
     margin-bottom: 20px;
 }
 
 
-.main .center .top_box .name{
+.main .center .my_top_box .name{
     font-size: 20px;
 }
 
@@ -345,7 +437,7 @@ nav{
 .main .center .my_post .post_bottom .post_icon{
     display: flex;
     align-items: center;
-    padding: 0 5px 0 40px;
+    padding: 0 ;
     cursor: pointer;
 }
 
@@ -423,7 +515,7 @@ nav{
     width: 100%;
     height: auto;
     background: #fff;
-    padding: 10px 15px;
+    padding: 10px 15px 20px 10px;
     border-radius: 7px;
     box-shadow: 0 1px 8px rgba(0,0,0,0.2);
 }

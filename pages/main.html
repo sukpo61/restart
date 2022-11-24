@@ -1,145 +1,130 @@
-    <div class="main">
+<div class="main">
 
     <!------------center---------------------->
     <a href="/" id="button">
         <img src="image/up-arrow.png" width="50">
     </a>
     <nav>
-                <img src="image/logo.png" class="logo" onclick="goTomain()">
+        <img src="image/logo.png" class="logo" onclick="goTomain()">
 
-            <form id="searchForm" onsubmit="getSearchResult(event)">
-      <div class="mx-auto input-group">
-        <input
-          id="searchInput"
-          name="q"
-          type="text"
-          class="form-control rounded-pill"
-          placeholder="Search"
-          aria-label="Recipient's username"
-          aria-describedby="button-addon2"
-        />
-        <button type="submit" form="searchForm" class="searchButton"><span class="material-symbols-outlined">
-search
-</span></button>
-      </div>
-    </form>
+        <form id="searchForm" onsubmit="getSearchResult(event)">
+            <div class="mx-auto input-group">
+                <input id="searchInput" name="q" type="text" class="form-control rounded-pill" placeholder="Search"
+                    aria-label="Recipient's username" aria-describedby="button-addon2" />
+                <button type="submit" form="searchForm" class="searchButton"><span class="material-symbols-outlined">
+                        search
+                    </span></button>
+            </div>
+        </form>
 
         <div class="top_toggle_img">
 
-           <img src="" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
+            <img src="" class="user-pic" id="top_bar_image" onclick="toggleMenu()">
 
         </div>
 
 
-                <div class="sub-menu-wrap" id="subMenu">
-                    <div class="sub-menu">
-                        <div id="dark-btn" onclick="darkBtnclick()">
-                            <span></span>
-                        </div>
-                        <div class="user-info">
-                            <img src="" id="dropdown_profile">
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <div id="dark-btn" onclick="darkBtnclick()">
+                    <span></span>
+                </div>
+                <div class="user-info">
+                    <img src="" id="dropdown_profile">
 
-                        </div>
+                </div>
 
-                        <div class="dropdown_info">
-                         <div id="nickname" class="mar_15">
-                        </div>
-                         <div id="dropdown_email" class="mar_10">
-                        </div>
-
-
-                        </div>
-
-
-
-                        <hr>
-                        <div class="dropdown_link">
-                           <a href="#mypage" class="sub-menu-link" onclick="route(event)">
-                            <img src="image/profile.png">
-                            <p>Edit profile</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link" onclick="logout()">
-                            <img src="image/logout.png">
-                            <p>Logout</p>
-                            <span></span>
-                        </a>
-                        </div>
-
+                <div class="dropdown_info">
+                    <div id="nickname" class="mar_15">
                     </div>
+                    <div id="dropdown_email" class="mar_10">
+                    </div>
+
+
                 </div>
 
-            </nav>
 
-        <div class="main_top_box">
-                <div class="grid_item">
-                     <img src="/images/nam.png" class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/hwang.png " class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/go.png " class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/cha.png" class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/ye.png" class="solo_profile">
+
+                <hr>
+                <div class="dropdown_link">
+                    <a href="#mypage" class="sub-menu-link" onclick="route(event)">
+                        <img src="image/profile.png">
+                        <p>Edit profile</p>
+                        <span></span>
+                    </a>
+                    <a href="#" class="sub-menu-link" onclick="logout()">
+                        <img src="image/logout.png">
+                        <p>Logout</p>
+                        <span></span>
+                    </a>
                 </div>
 
-                    <!-- /* 로고자리. 중앙정렬 해주세요, 로고 말고 다른거 들어가도 괜찮을듯 */ -->
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="main_top_box">
+        <div class="grid_item">
+            <img src="/images/nam.png" class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/hwang.png " class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/go.png " class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/cha.png" class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/ye.png" class="solo_profile">
+        </div>
+
+        <!-- /* 로고자리. 중앙정렬 해주세요, 로고 말고 다른거 들어가도 괜찮을듯 */ -->
+
+    </div>
+
+    <div class="center">
+
+
+
+
+
+
+        <div class="my_post">
+
+            <div class="post_top">
+
+                <img src="image/profile.png" id="post_top_profile">
+                <input class="form-control" placeholder="Leave a comment here" id="comment">
 
             </div>
 
-        <div class="center">
+            <hr>
+
+            <div class="post_bottom">
+
+                <label id="imgLabel" for="imgInput">
+
+                    <span class="material-symbols-outlined" id="img_color">
+                        image
+                    </span>
+                    <span>
+                        image
+                    </span>
 
 
 
+                    <input onchange="post_onFileChange(event)" id="imgInput" type="file" accept="images/*"
+                        class="noDisplay" />
+                </label>
 
 
-
-            <div class="my_post">
-
-                <div class="post_top">
-
-                    <img src="image/profile.png" id="post_top_profile">
-                    <input class="form-control"
-                    placeholder="Leave a comment here"
-                    id="comment"
-                     >
-
-                </div>
-
-                <hr>
-
-                <div class="post_bottom">
-
-                            <label id="imgLabel" for="imgInput">
-
-                                <span class="material-symbols-outlined" id="img_color">
-                                    image
-                                    </span>
-                                <span>
-                                    image
-                                </span>
+                <div class="profile_input">
 
 
-
-                              <input
-                                onchange="post_onFileChange(event)"
-                                id="imgInput"
-                                type="file"
-                                accept="images/*"
-                                class="noDisplay"
-                              />
-                            </label>
-
-
-                        <div class="profile_input">
-
-
-                             <button onclick="save_comment(event)" type="submit" class="post_icon">
+                    <button onclick="save_comment(event)" type="submit" class="post_icon">
                         <span class="material-symbols-outlined" id="send_color">
                             send
                         </span>
@@ -152,21 +137,21 @@ search
         </div>
         <div id="comment-list">
 
-            </div>
-
-
-
-
-
-            <div class="loard">
-                <button>Loard More</button>
-            </div>
-
-
-
-
         </div>
 
 
 
+
+
+        <div class="loard">
+            <button>Loard More</button>
+        </div>
+
+
+
+
     </div>
+
+
+
+</div>

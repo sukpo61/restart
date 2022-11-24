@@ -30,24 +30,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } else {
       // 로그아웃 상태이므로 로그인 화면으로 강제 이동
-      if (hash !== "") {
-        window.location.replace("");
-      }
+      if (hash === "#main_before") {
+        window.location.replace("#main_before");
+      }else{window.location.replace("#login")}
     }
   });
 });
 
-// document.addEventListener("DOMContentLoaded", () => {
-//
-//    let imgName = [
-//     'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
-//      ];
-//
-//     let randomNumber = Math.floor(Math.random() * imgName.length);
-//
-//     document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
-//
-// })
+document.addEventListener("DOMContentLoaded", () => {
+
+   let imgName = [
+    'mount', 'milky_way', 'bridge', 'cat', 'switzerland','nature','bangtan','black_pink'
+     ];
+
+    let randomNumber = Math.floor(Math.random() * imgName.length);
+
+    document.getElementById("background_image").src = "/images/" + imgName[randomNumber] +".jpg";
+
+})
 
 
 // onclick, onchange, onsubmit 이벤트 핸들러 리스트

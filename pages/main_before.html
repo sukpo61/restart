@@ -1,112 +1,70 @@
 <div class="main">
-
     <nav>
         <img src="image/logo.png" class="logo">
-
-            <form id="searchForm" onsubmit="getSearchResult(event)">
-      <div class="mx-auto input-group">
-        <input
-          id="searchInput"
-          name="q"
-          type="text"
-          class="form-control rounded-pill"
-          placeholder="Search"
-          aria-label="Recipient's username"
-          aria-describedby="button-addon2"
-        />
-        <button type="submit" form="searchForm" class="searchButton"><span class="material-symbols-outlined">
-search
-</span></button>
-      </div>
-    </form>
-
-
-                <div class="main_before_login_button_box">
-
-                    <div id="dark-btn" onclick="darkBtnclick()">
-                    <span></span>
-                </div>
-
-                   <button onclick="goToLogin()" class="main_before_login_button"><span class="login_text">로그인</span><span class="material-symbols-outlined">
-login
-</span></button>
-                    
-                </div>
-
-                <div class="sub-menu-wrap" id="subMenu">
-                    <div class="sub-menu">
-                        <div class="user-info">
-                            <img src="" id="dropdown_profile">
-
-                        </div>
-
-
-                        <div id="nickname">
-                          \
-                        </div>
-
-                         <div id="dropdown_email">
-                        \
-                        </div>
-
-
-
-                        <hr>
-
-                        <a href="#mypage" class="sub-menu-link" onclick="route(event)">
-                            <img src="image/profile.png">
-                            <p>Edit profile</p>
-                            <span></span>
-                        </a>
-                        <a href="#" class="sub-menu-link" onclick="logout()">
-                            <img src="image/logout.png">
-                            <p>Logout</p>
-                            <span></span>
-                        </a>
-                    </div>
-                </div>
-
-            </nav>
-
-        <!------------center---------------------->
-        <div class="main_top_box mar_b_30">
-                <div class="grid_item">
-                     <img src="/images/nam.png" class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/hwang.png " class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/go.png " class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/cha.png" class="solo_profile">
-                </div>
-                <div class="grid_item">
-                     <img src="/images/ye.png" class="solo_profile">
-                </div>
-
+        <form id="searchForm" onsubmit="getSearchResult(event)">
+            <div class="mx-auto input-group">
+                <input id="searchInput" name="q" type="text" class="form-control rounded-pill" placeholder="Search"
+                    aria-label="Recipient's username" aria-describedby="button-addon2" />
+                <button type="submit" form="searchForm" class="searchButton">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
             </div>
-
-        <div class="center">
-
-
-
-            <div id="comment-list">
-
+        </form>
+        <div class="main_before_login_button_box">
+            <div id="dark-btn" onclick="darkBtnclick()">
+                <span></span>
             </div>
-
-
-
-            <div class="loard">
-                <button>Loard More</button>
-            </div>
-
-
-
-
+            <button onclick="goToLogin()" class="main_before_login_button"><span class="login_text">로그인</span><span
+                    id="loginbtn" class="material-symbols-outlined">
+                    login
+                </span></button>
         </div>
-
-
-
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <div class="user-info">
+                    <img src="" id="dropdown_profile">
+                </div>
+                <div id="nickname">
+                </div>
+                <div id="dropdown_email">
+                </div>
+                <hr>
+                <a href="#mypage" class="sub-menu-link" onclick="route(event)">
+                    <img src="image/profile.png">
+                    <p>Edit profile</p>
+                    <span></span>
+                </a>
+                <a href="#" class="sub-menu-link" onclick="logout()">
+                    <img src="image/logout.png">
+                    <p>Logout</p>
+                    <span></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!------------center---------------------->
+    <div class="main_top_box mar_b_30">
+        <div class="grid_item">
+            <img src="/images/nam.png" class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/hwang.png " class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/go.png " class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/cha.png" class="solo_profile">
+        </div>
+        <div class="grid_item">
+            <img src="/images/ye.png" class="solo_profile">
+        </div>
     </div>
+    <div class="center">
+        <div id="comment-list">
+        </div>
+        <div class="loard">
+            <button>Loard More</button>
+        </div>
+    </div>
+</div>

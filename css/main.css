@@ -11,8 +11,9 @@ button{
 p{
     margin-bottom: 0;
 }
-.material-symbols-outlined {
-      background-color: var(--my_postback);
+
+
+
     font-variation-settings:
   'FILL' 1,
   'wght' 400,
@@ -174,11 +175,18 @@ p{
 }
 
 .main_before_login_button{
+    color: var( --search-color);
     display: flex;
     align-items: center;
+    background-color: var(--symbolback-color);
+}
+#login_btn{
+    background-color: var(--symbolback-color);
+    
 }
 .login_text{
-    background-color: var(--main_before_login-color);
+  
+    background-color: var(--symbolback-color);
     margin-right: 10px;
 }
 
@@ -376,6 +384,7 @@ nav{
     }
 
     :root{
+        --symbolback-color:#fff;
         --search-color:#0f0f0f;
         --searchback-color:#fff;
         --sublink-color:#525252;
@@ -392,6 +401,7 @@ nav{
 
     }
     .dark-theme{
+        --symbolback-color:#0f0f0f;
         --main_before_login-color:#0f0f0f;
         --search-color:#fff;
         --searchback-color:#0f0f0f;
@@ -411,6 +421,12 @@ nav{
         background-color: var(--body-color);
         transition: backgroud 0.3s;
     }
+
+    .login_title{
+
+        color: #000;
+    }
+
 /* top-bar */
 
 
@@ -457,9 +473,10 @@ nav{
     border-radius: 50%;
     margin-right: 50px;
 }
-span{
-    color: var(--search-color)
+#symbol1{
+    background-color: var(--symbolback-color);
 }
+
 .email{
     color: var(--search-color)
 }

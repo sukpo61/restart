@@ -14,7 +14,7 @@ p{
 
 
 
-    font-variation-settings:
+    font-variation-settings:{
   'FILL' 1,
   'wght' 400,
   'GRAD' -25,
@@ -185,7 +185,6 @@ p{
     
 }
 .login_text{
-  
     background-color: var(--symbolback-color);
     margin-right: 10px;
 }
@@ -355,6 +354,9 @@ nav{
     .sub-menu-link:hover p{
         font-weight: 600;
     }
+   .com{
+    color: var(--search-color);
+   }
 
     /*다크모드 버튼*/
     #dark-btn{
@@ -369,7 +371,6 @@ nav{
         display: flex;
         transition: padding-lift 0.5s, background 0.5s;
     }
-
     #dark-btn span{
         width: 18px;
         height: 18px;
@@ -377,12 +378,10 @@ nav{
         border-radius: 50%;
         display: inline-block;
     }
-
     #dark-btn.dark-btn-on{
       padding-left: 23px;
       background: #000;
     }
-
     :root{
         --symbolback-color:#fff;
         --search-color:#0f0f0f;
@@ -398,7 +397,6 @@ nav{
         --main-color:#efefef;
         --body-color:#efefef;
         --nav-color:rgba(255, 255, 255, 0.75);
-
     }
     .dark-theme{
         --symbolback-color:#0f0f0f;

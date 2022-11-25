@@ -213,7 +213,7 @@ export const getCommentList = async (searchContent, searchList) => {
                               .toString()
                               .slice(0, 25)}</span>
                             </div>
-                            <div><span>${cmtObj.text}</span></div>
+                            <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
                                 <button class="updateBtn" onclick="update_comment(event)">완료</button>
@@ -325,7 +325,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                               .toString()
                               .slice(0, 25)}</span>
                             </div>
-                            <div><span>${cmtObj.text}</span></div>
+                            <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
                                 <button class="updateBtn" onclick="update_comment(event)">완료</button>
@@ -438,7 +438,7 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
                               .toString()
                               .slice(0, 25)}</span>
                             </div>
-                            <div><span>${cmtObj.text}</span></div>
+                            <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
                                 <button class="updateBtn" onclick="update_comment(event)">완료</button>

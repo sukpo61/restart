@@ -20,7 +20,6 @@ window.addEventListener("hashchange",() =>{
    let darkBtn = document.getElementById("dark-btn");
   darkBtn.classList.toggle("dark-btn-on");
   }
-
 });
 
 // 첫 랜딩 또는 새로고침 시 handleLocation 실행하여 화면 변경

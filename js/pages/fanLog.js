@@ -344,10 +344,10 @@ export const getCommentList = async (searchContent, searchList) => {
                         <span class="like_button">Like</span>
                     </div>
 
-<!--                    <div class="like_icon">-->
-<!--                        <i class="fa-solid fa-message"></i>-->
-<!--                        <p>Comments</p>-->
-<!--                    </div>-->        
+                    <div class="like_icon">
+                 <i class="fa-solid fa-message"></i>
+                       <p>Comments</p>
+                 </div>        
                     
 
  

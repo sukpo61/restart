@@ -95,6 +95,27 @@ export const handleLocation = async () => {
    darkBtn.classList.toggle("dark-btn-on");
   }
 
+  if(path === "login"){
+    document.addEventListener("DOMContentLoaded", () => {
+  let imgName = [
+    "mount",
+    "milky_way",
+    "bridge",
+    "cat",
+    "switzerland",
+    "nature",
+    "bangtan",
+    "black_pink",
+  ];
+
+  let randomNumber = Math.floor(Math.random() * imgName.length);
+
+  document.querySelector("#background_image").src =
+    "/images/" + imgName[randomNumber] + ".jpg";
+});
+
+
+  }
 };
 
 export const goTomain = () => {

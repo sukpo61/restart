@@ -7,6 +7,7 @@ import {
   orderBy,
   query,
   getDocs,
+  runTransaction,
 } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 import { dbService, authService, storageService } from "../firebase.js";
 import {
@@ -56,6 +57,8 @@ export const save_comment = async (event) => {
       profileImg: photoURL,
       nickname: displayName,
       Downurl: downloadUrl,
+      like_count: 0,
+      like_user_list:[]
     };
 
     try {
@@ -82,6 +85,8 @@ export const save_comment = async (event) => {
       profileImg: photoURL,
       nickname: displayName,
       Downurl: "",
+      like_count: 0,
+      like_user_list:[]
     };
 
     try {
@@ -98,6 +103,69 @@ export const save_comment = async (event) => {
     }
   }
 };
+
+export const Like_Button = async (event) => {
+  event.preventDefault();
+  let path = window.location.hash.replace("#", "");
+  const currentUid = authService.currentUser.uid;
+  const id = event.target.parentNode.parentNode.id;
+  const likeRef = doc(dbService, "comments", id)
+
+ try {
+  await runTransaction(dbService, async (transaction) => {
+    const likeDoc = await transaction.get(likeRef);
+    if (!likeDoc.exists()) {
+      throw "Document does not exist!";
+    }
+
+    let like_user_list = likeDoc.data().like_user_list;
+    let like_count = likeDoc.data().like_count;
+
+
+    if(like_user_list.includes(currentUid)){
+      like_user_list = like_user_list.filter((e)=> e !== currentUid)
+      like_count--
+      transaction.update(likeRef, { like_user_list: like_user_list,
+      like_count : like_count});
+      console.log(like_count,like_user_list)
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
+    }
+
+    else
+
+    {
+      like_user_list.push(currentUid)
+      like_count++
+      transaction.update(likeRef, { like_user_list: like_user_list,
+      like_count : like_count});
+      console.log(like_count,like_user_list)
+      if (path == "main") {
+        getCommentList();
+      } else {
+        getCommentList_mypage();
+      }
+    }
+
+
+
+
+
+
+
+  });
+} catch (e) {
+  console.log("Transaction failed: ", e);
+}
+
+
+
+}
+
+
 
 export const onEditing = (event) => {
   // 수정버튼 클릭
@@ -145,7 +213,7 @@ export const delete_comment = async (event) => {
   let path = window.location.hash.replace("#", "");
   event.preventDefault();
   const id = event.target.parentNode.name;
-  const ok = window.confirm("해당 응원글을 정말 삭제하시겠습니까?");
+  const ok = window.confirm("해당 글을 정말 삭제하시겠습니까?");
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
@@ -249,8 +317,40 @@ export const getCommentList = async (searchContent, searchList) => {
              <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
                    <img src="${cmtObj.Downurl}">
                    </div>
+                   
+                   <div class="like_wrap">
+                   
+                    <div class="info">
 
+                    <div class="emoji_img">
+                        <img src="image/like.png">
 
+                        <span class="like_count">${cmtObj.like_count}</span>
+                    </div>
+
+                    <div class="comment">
+<!--                        <p>421 Comments</p>-->
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="like" id="${cmtObj.id}">
+
+                    <div class="like_icon" onclick="Like_Button(event)">
+                        <i class="fa-solid fa-thumbs-up activi"></i>
+                        <span class="like_button">Like</span>
+                    </div>
+
+<!--                    <div class="like_icon">-->
+<!--                        <i class="fa-solid fa-message"></i>-->
+<!--                        <p>Comments</p>-->
+<!--                    </div>-->        
+                    
+
+ 
             </div>
 
 `;
@@ -362,7 +462,36 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                    <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
                    <img src="${cmtObj.Downurl}">
                    </div>
-                
+                 <div class="like_wrap">
+                   
+                    <div class="info">
+
+                    <div class="emoji_img">
+                        <img src="image/like.png">
+
+                        <span class="like_count">${cmtObj.like_count}</span>
+                    </div>
+
+                    <div class="comment">
+<!--                        <p>421 Comments</p>-->
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="like" id="${cmtObj.id}">
+
+                    <div class="like_icon" onclick="Like_Button(event)">
+                        <i class="fa-solid fa-thumbs-up activi"></i>
+                        <span class="like_button">Like</span>
+                    </div>
+
+<!--                    <div class="like_icon">-->
+<!--                        <i class="fa-solid fa-message"></i>-->
+<!--                        <p>Comments</p>-->
+<!--                    </div>-->
 
               
 
@@ -473,6 +602,28 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
                    <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
                    <img src="${cmtObj.Downurl}">
                    </div>
+                   
+                <div class="like_wrap">
+                   
+                    <div class="info">
+
+                    <div class="emoji_img">
+                        <img src="image/like.png">
+
+                        <span class="like_count">${cmtObj.like_count}</span>
+                    </div>
+
+                    <div class="comment">
+<!--                        <p>421 Comments</p>-->
+
+                    </div>
+
+                </div>
+
+<!--                    <div class="like_icon">-->
+<!--                        <i class="fa-solid fa-message"></i>-->
+<!--                        <p>Comments</p>-->
+<!--                    </div>-->
 
               
             </div>
@@ -484,6 +635,9 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
     commnetList.appendChild(div);
   });
 };
+
+
+
 
 export const getSearchResult = async (event) => {
   event.preventDefault();

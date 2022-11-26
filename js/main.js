@@ -46,6 +46,28 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+window.addEventListener("resize", function (){
+  let login_layout = document.querySelector('.login_layout')
+  let logo = document.querySelector('.team_logo img')
+  let windowWidth = window.innerWidth,
+      standard = 1300
+   if(windowWidth < standard){
+
+     login_layout.style.justifyContent = 'center'
+     logo.style.width = 0
+
+
+        }else {
+
+     login_layout.style.justifyContent = 'space-between'
+     logo.style.width = '280px'
+
+
+        }
+})
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   let imgName = [
     "mount",

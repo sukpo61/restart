@@ -201,11 +201,6 @@ export const update_comment = async (event) => {
   const commentRef = doc(dbService, "comments", id);
   try {
     await updateDoc(commentRef, { text: newComment });
-    if (path == "main") {
-      getCommentList();
-    } else {
-      getCommentList_mypage();
-    }
   } catch (error) {
     alert(error);
   }
@@ -219,11 +214,7 @@ export const delete_comment = async (event) => {
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
-      if (path == "main") {
-        getCommentList();
-      } else {
-        getCommentList_mypage();
-      }
+
     } catch (error) {
       alert(error);
     }
@@ -286,7 +277,7 @@ export const getCommentList = async (searchContent, searchList) => {
                             <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
-                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                                <button class="updateBtn" onclick="update_comment(event),getCommentList()">완료</button>
                             </p>
 
                         </div>
@@ -294,16 +285,16 @@ export const getCommentList = async (searchContent, searchList) => {
 
                     </div>
 
-                    <div class=${isOwner ? "menu" : "noDisplay"}>
+                    <div class=${isOwner ? "menu" : "noDisplay"}  id="${cmtObj.id}">
                     
-                                        <button onclick="onEditing(event)" class="editBtn mar_10">
+                                        <button onclick="onEditing(event)" class="editBtn mar_10" >
                             <span class="material-symbols-outlined botton_color">
                                 edit
                             </span>
                         </button>
                      <button name="${
                        cmtObj.id
-                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     }" onclick="delete_comment(event),getCommentList()" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -383,7 +374,12 @@ export const getCommentList = async (searchContent, searchList) => {
                 
 
                         
+                        
+                        
                         </div>
+                        
+                        
+                        
                 </div>
                 
 
@@ -462,7 +458,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                             <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput" type="text">
-                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                                <button class="updateBtn" onclick="update_comment(event),getCommentList_mypage()">완료</button>
                             </p>
 
                         </div>
@@ -480,7 +476,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                         </button>
                      <button name="${
                        cmtObj.id
-                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     }" onclick="delete_comment(event),getCommentList_mypage()" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -687,8 +683,10 @@ export const post_getCommentList = async (event) => {
   let post_id = event.target.parentNode.parentNode.id ;
   console.log(post_id)
   let post_comments = document.getElementById(post_id + "_post");
+   console.log(post_comments)
+
   post_comments.innerHTML="";
-  console.log(post_comments)
+
   const currentUid = authService.currentUser.uid;
   cmtObjList.forEach((cmtObj) => {
     if(cmtObj.post_id == post_id){
@@ -702,7 +700,7 @@ export const post_getCommentList = async (event) => {
                           cmtObj.profileImg ?? "../assets/blankProfile.webp"
                         }">
 
-                             <div class="comment_contents">
+                             <div class="comment_contents" id="${cmtObj.id}">
                             <div class="name_and_time">
                                 <span class="friends_name">
                                 ${cmtObj.nickname ?? "닉네임 없음"}
@@ -714,7 +712,7 @@ export const post_getCommentList = async (event) => {
                             <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput">
-                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                                <button class="updateBtn" onclick="update_comment(event),post_getCommentList(event)">완료</button>
                             </p>
 
                         </div>
@@ -732,7 +730,7 @@ export const post_getCommentList = async (event) => {
                         </button>
                      <button name="${
                        cmtObj.id
-                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                     }" onclick="delete_comment(event),post_getCommentList(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -762,8 +760,6 @@ export const post_comment_toggle = async (event) => {
   post_comment_box.classList.toggle("noDisplay")
 
 }
-
-
 
 export const post_save_comment = async (event) => {
   event.preventDefault();
@@ -832,7 +828,9 @@ export const post_save_comment = async (event) => {
           cmtObj.profileImg ?? "../assets/blankProfile.webp"
       }">
 
-                             <div class="comment_contents">
+                             <div class="comment_contents" id="${
+          cmtObj.id
+      }">
                             <div class="name_and_time">
                                 <span class="friends_name">
                                 ${cmtObj.nickname ?? "닉네임 없음"}
@@ -844,7 +842,7 @@ export const post_save_comment = async (event) => {
                             <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
                                 <input class="newCmtInput">
-                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                                <button class="updateBtn" onclick="update_comment(event),post_getCommentList(event)">완료</button>
                             </p>
 
                         </div>
@@ -853,7 +851,9 @@ export const post_save_comment = async (event) => {
 
                     </div>
 
-                    <div class=${isOwner ? "menu" : "noDisplay"}>
+                    <div class=${isOwner ? "menu" : "noDisplay"} id="${
+          cmtObj.id
+      }">
 
                       <button onclick="onEditing(event)" class="editBtn mar_10">
                             <span class="material-symbols-outlined botton_color">
@@ -862,7 +862,7 @@ export const post_save_comment = async (event) => {
                         </button>
                      <button name="${
           cmtObj.id
-      }" onclick="delete_comment(event)" class="deleteBtn mar_5">
+      }" onclick="delete_comment(event),post_getCommentList(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -882,8 +882,6 @@ export const post_save_comment = async (event) => {
   });
 
 }
-
-
 
 export const getSearchResult = async (event) => {
   event.preventDefault();

@@ -13,7 +13,9 @@ import {
   Like_Button,
   post_save_comment,
   post_getCommentList,
-  post_comment_toggle
+  post_comment_toggle,
+  getCommentList,
+  getCommentList_mypage
 } from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
@@ -112,3 +114,5 @@ window.Like_Button = Like_Button;
 window.post_save_comment = post_save_comment;
 window.post_getCommentList = post_getCommentList;
 window.post_comment_toggle = post_comment_toggle;
+window.getCommentList_mypage = getCommentList_mypage;
+window.getCommentList = getCommentList;

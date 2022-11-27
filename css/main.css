@@ -230,7 +230,7 @@ p{
     justify-content: center;
     align-items: center;
     background-color: var(--subback-color);
-);
+;
 
 }
 
@@ -320,7 +320,19 @@ nav{
                 flex-direction: column;
 
     }
+    
+   
+    .fa-heart:before {
+        color: red;
+        
+    }
+    .fa-message::before{
+        color: rgb(67, 118, 247);
+    }
 
+   .message_post{
+    color: var(--sub-color);
+   }
     .sub-menu-wrap{
         border-radius: 12px;
         position: absolute;
@@ -431,7 +443,7 @@ nav{
         --sublink-color:#525252;
         --sub-color:#000;
         --subback-color:#fff;
-        --send-color:#ABC7CD ;
+        --send-color:#000 ;
         --my_postcolor:#000;
         --my_postback:#fff;
         --top_box-color:#efefef;

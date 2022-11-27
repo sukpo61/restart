@@ -58,8 +58,8 @@ export const save_comment = async (event) => {
       nickname: displayName,
       Downurl: downloadUrl,
       like_count: 0,
-      like_user_list:[],
-      type : "post"
+      like_user_list: [],
+      type: "post",
     };
 
     try {
@@ -87,8 +87,8 @@ export const save_comment = async (event) => {
       nickname: displayName,
       Downurl: "",
       like_count: 0,
-      like_user_list:[],
-      type : "post"
+      like_user_list: [],
+      type: "post",
     };
 
     try {
@@ -111,63 +111,50 @@ export const Like_Button = async (event) => {
   let path = window.location.hash.replace("#", "");
   const currentUid = authService.currentUser.uid;
   const id = event.target.parentNode.parentNode.id;
-  const likeRef = doc(dbService, "comments", id)
+  const likeRef = doc(dbService, "comments", id);
 
- try {
-  await runTransaction(dbService, async (transaction) => {
-    const likeDoc = await transaction.get(likeRef);
-    if (!likeDoc.exists()) {
-      throw "Document does not exist!";
-    }
-
-    let like_user_list = likeDoc.data().like_user_list;
-    let like_count = likeDoc.data().like_count;
-
-
-    if(like_user_list.includes(currentUid)){
-      like_user_list = like_user_list.filter((e)=> e !== currentUid)
-      like_count--
-      transaction.update(likeRef, { like_user_list: like_user_list,
-      like_count : like_count});
-      console.log(like_count,like_user_list)
-      if (path == "main") {
-        getCommentList();
-      } else {
-        getCommentList_mypage();
+  try {
+    await runTransaction(dbService, async (transaction) => {
+      const likeDoc = await transaction.get(likeRef);
+      if (!likeDoc.exists()) {
+        throw "Document does not exist!";
       }
-    }
 
-    else
+      let like_user_list = likeDoc.data().like_user_list;
+      let like_count = likeDoc.data().like_count;
 
-    {
-      like_user_list.push(currentUid)
-      like_count++
-      transaction.update(likeRef, { like_user_list: like_user_list,
-      like_count : like_count});
-      console.log(like_count,like_user_list)
-      if (path == "main") {
-        getCommentList();
+      if (like_user_list.includes(currentUid)) {
+        like_user_list = like_user_list.filter((e) => e !== currentUid);
+        like_count--;
+        transaction.update(likeRef, {
+          like_user_list: like_user_list,
+          like_count: like_count,
+        });
+        console.log(like_count, like_user_list);
+        if (path == "main") {
+          getCommentList();
+        } else {
+          getCommentList_mypage();
+        }
       } else {
-        getCommentList_mypage();
+        like_user_list.push(currentUid);
+        like_count++;
+        transaction.update(likeRef, {
+          like_user_list: like_user_list,
+          like_count: like_count,
+        });
+        console.log(like_count, like_user_list);
+        if (path == "main") {
+          getCommentList();
+        } else {
+          getCommentList_mypage();
+        }
       }
-    }
-
-
-
-
-
-
-
-  });
-} catch (e) {
-  console.log("Transaction failed: ", e);
-}
-
-
-
-}
-
-
+    });
+  } catch (e) {
+    console.log("Transaction failed: ", e);
+  }
+};
 
 export const onEditing = (event) => {
   // 수정버튼 클릭
@@ -214,7 +201,6 @@ export const delete_comment = async (event) => {
   if (ok) {
     try {
       await deleteDoc(doc(dbService, "comments", id));
-
     } catch (error) {
       alert(error);
     }
@@ -250,11 +236,12 @@ export const getCommentList = async (searchContent, searchList) => {
   const currentUid = authService.currentUser.uid;
   commnetList.innerHTML = "";
   // debugger;
-  showList.forEach((cmtObj) => {if(cmtObj.type == "post"){
-    // debugger;
-    const imgemptycheck = cmtObj.Downurl === "";
-    const isOwner = currentUid === cmtObj.creatorId;
-    const temp_html = `
+  showList.forEach((cmtObj) => {
+    if (cmtObj.type == "post") {
+      // debugger;
+      const imgemptycheck = cmtObj.Downurl === "";
+      const isOwner = currentUid === cmtObj.creatorId;
+      const temp_html = `
                 <div class="friends_post">
 
                 <div class="friend_post_top">
@@ -285,7 +272,9 @@ export const getCommentList = async (searchContent, searchList) => {
 
                     </div>
 
-                    <div class=${isOwner ? "menu" : "noDisplay"}  id="${cmtObj.id}">
+                    <div class=${isOwner ? "menu" : "noDisplay"}  id="${
+        cmtObj.id
+      }">
                     
                                         <button onclick="onEditing(event)" class="editBtn mar_10" >
                             <span class="material-symbols-outlined botton_color">
@@ -315,8 +304,10 @@ export const getCommentList = async (searchContent, searchList) => {
                    
                     <div class="info">
 
-                    <div class="emoji_img">
-                        <img src="image/like.png">
+                
+
+                        <div class="emoji_img">
+                        <img src="image/heart.png">
 
                         <span class="like_count">${cmtObj.like_count}</span>
                     </div>
@@ -333,13 +324,16 @@ export const getCommentList = async (searchContent, searchList) => {
                 <div class="like" id="${cmtObj.id}">
                   
                     <div class="like_icon" onclick="Like_Button(event)" >
-                        <i class="fa-solid fa-thumbs-up activi"></i>
-                        <span class="like_button">Like</span>
+                    <i class="fa-regular fa-heart"></i>
+                        <span class="like_button">좋아요</span>
+                        
                     </div>
+
+                
                  
                     <div class="like_icon" onclick="post_getCommentList(event), post_comment_toggle(event)">
                  <i class="fa-solid fa-message"></i>
-                       <p>Comments</p>
+                       <p class="message_post">댓글달기</p>
                  </div>     
                  
                     
@@ -352,12 +346,16 @@ export const getCommentList = async (searchContent, searchList) => {
                 <div class="noDisplay" id="${cmtObj.id}_post_comment_box">
                 <div class="comment_warpper" id="${cmtObj.id}">
 
-                    <img sr="image/profile.png">
+                <img src="${
+                  cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                }">
                     <div class="circle"></div>
 
                     <div class="comment_search">
 
-                        <input placeholder="Write a comment" id="${cmtObj.id}_post_text">
+                        <input placeholder="댓글을 달아주세요." id="${
+                          cmtObj.id
+                        }_post_text">
                        
                         
 
@@ -384,12 +382,13 @@ export const getCommentList = async (searchContent, searchList) => {
                 
 
 `;
-    const div = document.createElement("div");
-    div.classList.add("mycards");
-    // debugger;
-    div.innerHTML = temp_html;
-    commnetList.appendChild(div);
-  }});
+      const div = document.createElement("div");
+      div.classList.add("mycards");
+      // debugger;
+      div.innerHTML = temp_html;
+      commnetList.appendChild(div);
+    }
+  });
 };
 
 export const getCommentList_mypage = async (searchContent, searchList) => {
@@ -514,7 +513,9 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                 <div class="like" id="${cmtObj.id}">
 
                     <div class="like_icon" onclick="Like_Button(event)">
-                        <i class="fa-solid fa-thumbs-up activi"></i>
+                        
+                        <i class="fa-regular fa-heart"></i>
+
                         <span class="like_button">Like</span>
                     </div>
 
@@ -574,10 +575,11 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
 
   const commnetList = document.getElementById("comment-list");
   commnetList.innerHTML = "";
-  showList.forEach((cmtObj) => {if(cmtObj.type == "post"){
-    const imgemptycheck = cmtObj.Downurl === "";
+  showList.forEach((cmtObj) => {
+    if (cmtObj.type == "post") {
+      const imgemptycheck = cmtObj.Downurl === "";
 
-    const temp_html = `
+      const temp_html = `
                 <div class="friends_post">
 
                 <div class="friend_post_top">
@@ -638,7 +640,7 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
                     <div class="info">
 
                     <div class="emoji_img">
-                        <img src="image/like.png">
+                        <img src="image/heart.png">
 
                         <span class="like_count">${cmtObj.like_count}</span>
                     </div>
@@ -659,15 +661,16 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
             </div>
 
 `;
-    const div = document.createElement("div");
-    div.classList.add("mycards");
-    div.innerHTML = temp_html;
-    commnetList.appendChild(div);
-  }});
+      const div = document.createElement("div");
+      div.classList.add("mycards");
+      div.innerHTML = temp_html;
+      commnetList.appendChild(div);
+    }
+  });
 };
 
 export const post_getCommentList = async (event) => {
- let cmtObjList = [];
+  let cmtObjList = [];
   const q = query(
     collection(dbService, "comments"),
     orderBy("createdAt", "desc")
@@ -680,19 +683,19 @@ export const post_getCommentList = async (event) => {
     };
     cmtObjList.push(commentObj);
   });
-  let post_id = event.target.parentNode.parentNode.id ;
-  console.log(post_id)
+  let post_id = event.target.parentNode.parentNode.id;
+  console.log(post_id);
   let post_comments = document.getElementById(post_id + "_post");
-   console.log(post_comments)
+  console.log(post_comments);
 
-  post_comments.innerHTML="";
+  post_comments.innerHTML = "";
 
   const currentUid = authService.currentUser.uid;
   cmtObjList.forEach((cmtObj) => {
-    if(cmtObj.post_id == post_id){
-    const isOwner = currentUid === cmtObj.creatorId;
-    //현재 이메일아디와 댓글아이를 비교해 수정삭제가능하게 하는 부분인듯
-    const temp_html = `<div class="friend_post_top">
+    if (cmtObj.post_id == post_id) {
+      const isOwner = currentUid === cmtObj.creatorId;
+      //현재 이메일아디와 댓글아이를 비교해 수정삭제가능하게 하는 부분인듯
+      const temp_html = `<div class="friend_post_top">
 
                     <div class="img_and_name">
 
@@ -742,32 +745,29 @@ export const post_getCommentList = async (event) => {
 
                 </div>
 `;
-    const div = document.createElement("div");
-    div.classList.add("mycards");
-    div.innerHTML = temp_html;
-    post_comments.appendChild(div);
-  }});
-
-
-
-}
+      const div = document.createElement("div");
+      div.classList.add("mycards");
+      div.innerHTML = temp_html;
+      post_comments.appendChild(div);
+    }
+  });
+};
 
 export const post_comment_toggle = async (event) => {
   event.preventDefault();
-  let post_id = event.target.parentNode.parentNode.id
+  let post_id = event.target.parentNode.parentNode.id;
   let post_comment_box = document.getElementById(post_id + "_post_comment_box");
-  console.log(post_comment_box)
-  post_comment_box.classList.toggle("noDisplay")
-
-}
+  console.log(post_comment_box);
+  post_comment_box.classList.toggle("noDisplay");
+};
 
 export const post_save_comment = async (event) => {
   event.preventDefault();
-  let post_id = event.target.parentNode.id
+  let post_id = event.target.parentNode.id;
   let post_comment = document.getElementById(post_id + "_post_text");
-  console.log(post_comment)
+  console.log(post_comment);
 
-  const {uid, photoURL, displayName} = authService.currentUser;
+  const { uid, photoURL, displayName } = authService.currentUser;
 
   let data = {
     text: post_comment.value,
@@ -778,7 +778,7 @@ export const post_save_comment = async (event) => {
     Downurl: "",
     like_count: 0,
     like_user_list: [],
-    post_id: post_id
+    post_id: post_id,
   };
 
   try {
@@ -789,17 +789,15 @@ export const post_save_comment = async (event) => {
     // } else {
     //   getCommentList_mypage();
     // }
-
   } catch (error) {
     alert(error);
     console.log("error in addDoc:", error);
   }
 
-
   let cmtObjList = [];
   const q = query(
-      collection(dbService, "comments"),
-      orderBy("createdAt", "desc")
+    collection(dbService, "comments"),
+    orderBy("createdAt", "desc")
   );
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
@@ -810,11 +808,10 @@ export const post_save_comment = async (event) => {
     cmtObjList.push(commentObj);
   });
 
-
-  console.log(post_id)
+  console.log(post_id);
   let post_comments = document.getElementById(post_id + "_post");
   post_comments.innerHTML = "";
-  console.log(post_comments)
+  console.log(post_comments);
   const currentUid = authService.currentUser.uid;
   cmtObjList.forEach((cmtObj) => {
     if (cmtObj.post_id == post_id) {
@@ -825,19 +822,17 @@ export const post_save_comment = async (event) => {
                     <div class="img_and_name">
 
                         <img src="${
-          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-      }">
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
 
-                             <div class="comment_contents" id="${
-          cmtObj.id
-      }">
+                             <div class="comment_contents" id="${cmtObj.id}">
                             <div class="name_and_time">
                                 <span class="friends_name">
                                 ${cmtObj.nickname ?? "닉네임 없음"}
                             </span>
                             <span class="time">${new Date(cmtObj.createdAt)
-          .toString()
-          .slice(0, 25)}</span>
+                              .toString()
+                              .slice(0, 25)}</span>
                             </div>
                             <div class="com"><span>${cmtObj.text}</span></div>
                             <p id="${cmtObj.id}" class="noDisplay">
@@ -852,7 +847,7 @@ export const post_save_comment = async (event) => {
                     </div>
 
                     <div class=${isOwner ? "menu" : "noDisplay"} id="${
-          cmtObj.id
+        cmtObj.id
       }">
 
                       <button onclick="onEditing(event)" class="editBtn mar_10">
@@ -861,8 +856,8 @@ export const post_save_comment = async (event) => {
                             </span>
                         </button>
                      <button name="${
-          cmtObj.id
-      }" onclick="delete_comment(event),post_getCommentList(event)" class="deleteBtn mar_5">
+                       cmtObj.id
+                     }" onclick="delete_comment(event),post_getCommentList(event)" class="deleteBtn mar_5">
                             <span class="material-symbols-outlined botton_color">
                                 delete
                             </span>
@@ -880,8 +875,7 @@ export const post_save_comment = async (event) => {
       post_comments.appendChild(div);
     }
   });
-
-}
+};
 
 export const getSearchResult = async (event) => {
   event.preventDefault();

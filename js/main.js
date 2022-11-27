@@ -15,16 +15,16 @@ import {
   post_getCommentList,
   post_comment_toggle,
   getCommentList,
-  getCommentList_mypage
+  getCommentList_mypage,
 } from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
 window.addEventListener("hashchange", handleLocation);
 
-window.addEventListener("hashchange",() =>{
-  if($("#body").hasClass("dark-theme")){
-   let darkBtn = document.getElementById("dark-btn");
-  darkBtn.classList.toggle("dark-btn-on");
+window.addEventListener("hashchange", () => {
+  if ($("#body").hasClass("dark-theme")) {
+    let darkBtn = document.getElementById("dark-btn");
+    darkBtn.classList.toggle("dark-btn-on");
   }
 });
 
@@ -51,26 +51,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-window.addEventListener("resize", function (){
-  let login_layout = document.querySelector('.login_layout')
-  let logo = document.querySelector('.team_logo img')
+window.addEventListener("resize", function () {
+  let login_layout = document.querySelector(".login_layout");
+  let logo = document.querySelector(".team_logo img");
   let windowWidth = window.innerWidth,
-      standard = 1300
-   if(windowWidth < standard){
-
-     login_layout.style.justifyContent = 'center'
-     logo.style.width = 0
-
-
-        }else {
-
-     login_layout.style.justifyContent = 'space-between'
-     logo.style.width = '280px'
-
-
-        }
-})
-
+    standard = 1300;
+  if (windowWidth < standard) {
+    login_layout.style.justifyContent = "center";
+    logo.style.width = 0;
+  } else {
+    login_layout.style.justifyContent = "space-between";
+    logo.style.width = "280px";
+  }
+});
 
 //
 // document.addEventListener("DOMContentLoaded", () => {

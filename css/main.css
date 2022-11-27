@@ -233,6 +233,23 @@ p{
 );
 
 }
+
+#comment_send{
+    margin-left: 10px;
+}
+
+.like_comment_wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.post_comments{
+    padding: 0 25px;
+    margin-bottom: 0;
+    margin-top: 15px ;
+}
+
+
 /*-----------------main---------------*/
 
 body, html{
@@ -649,6 +666,9 @@ nav{
     justify-content: space-between;
     margin-bottom: 15px;
 }
+
+
+
 
 .main .center .friends_post .friend_post_top .img_and_name{
     display: flex;

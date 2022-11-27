@@ -58,7 +58,8 @@ export const save_comment = async (event) => {
       nickname: displayName,
       Downurl: downloadUrl,
       like_count: 0,
-      like_user_list:[]
+      like_user_list:[],
+      type : "post"
     };
 
     try {
@@ -86,7 +87,8 @@ export const save_comment = async (event) => {
       nickname: displayName,
       Downurl: "",
       like_count: 0,
-      like_user_list:[]
+      like_user_list:[],
+      type : "post"
     };
 
     try {
@@ -257,7 +259,7 @@ export const getCommentList = async (searchContent, searchList) => {
   const currentUid = authService.currentUser.uid;
   commnetList.innerHTML = "";
   // debugger;
-  showList.forEach((cmtObj) => {
+  showList.forEach((cmtObj) => {if(cmtObj.type == "post"){
     // debugger;
     const imgemptycheck = cmtObj.Downurl === "";
     const isOwner = currentUid === cmtObj.creatorId;
@@ -318,7 +320,7 @@ export const getCommentList = async (searchContent, searchList) => {
                    <img src="${cmtObj.Downurl}">
                    </div>
                    
-                   <div class="like_wrap">
+                   <div class="like_comment_wrap">
                    
                     <div class="info">
 
@@ -338,20 +340,52 @@ export const getCommentList = async (searchContent, searchList) => {
                 <hr>
 
                 <div class="like" id="${cmtObj.id}">
-
-                    <div class="like_icon" onclick="Like_Button(event)">
+                  
+                    <div class="like_icon" onclick="Like_Button(event)" >
                         <i class="fa-solid fa-thumbs-up activi"></i>
                         <span class="like_button">Like</span>
                     </div>
-
-                    <div class="like_icon">
+                 
+                    <div class="like_icon" onclick="post_getCommentList(event), post_comment_toggle(event)">
                  <i class="fa-solid fa-message"></i>
                        <p>Comments</p>
-                 </div>        
+                 </div>     
+                 
+                    
                     
 
  
             </div>
+            
+            <hr>
+                <div class="noDisplay" id="${cmtObj.id}_post_comment_box">
+                <div class="comment_warpper" id="${cmtObj.id}">
+
+                    <img sr="image/profile.png">
+                    <div class="circle"></div>
+
+                    <div class="comment_search">
+
+                        <input placeholder="Write a comment" id="${cmtObj.id}_post_text">
+                       
+                        
+
+                    </div>
+                    
+                    <span class="material-symbols-outlined" id="comment_send" onclick="post_save_comment(event)">
+                            send
+                        </span>
+                        
+                        
+                </div>
+               
+                <div class="post_comments" id="${cmtObj.id}_post">
+                
+
+                        
+                        </div>
+                </div>
+                
 
 `;
     const div = document.createElement("div");
@@ -359,7 +393,7 @@ export const getCommentList = async (searchContent, searchList) => {
     // debugger;
     div.innerHTML = temp_html;
     commnetList.appendChild(div);
-  });
+  }});
 };
 
 export const getCommentList_mypage = async (searchContent, searchList) => {
@@ -402,7 +436,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
   const currentUid = authService.currentUser.uid;
   commnetList.innerHTML = "";
   showList.forEach((cmtObj) => {
-    if (cmtObj.creatorId == currentUid) {
+    if (cmtObj.creatorId == currentUid && cmtObj.type == "post") {
       const isOwner = currentUid === cmtObj.creatorId;
       const imgemptycheck = cmtObj.Downurl === "";
       const temp_html = `
@@ -544,7 +578,7 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
 
   const commnetList = document.getElementById("comment-list");
   commnetList.innerHTML = "";
-  showList.forEach((cmtObj) => {
+  showList.forEach((cmtObj) => {if(cmtObj.type == "post"){
     const imgemptycheck = cmtObj.Downurl === "";
 
     const temp_html = `
@@ -633,9 +667,221 @@ export const getCommentList_main_before = async (searchContent, searchList) => {
     div.classList.add("mycards");
     div.innerHTML = temp_html;
     commnetList.appendChild(div);
-  });
+  }});
 };
 
+export const post_getCommentList = async (event) => {
+ let cmtObjList = [];
+  const q = query(
+    collection(dbService, "comments"),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const commentObj = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    cmtObjList.push(commentObj);
+  });
+  let post_id = event.target.parentNode.parentNode.id ;
+  console.log(post_id)
+  let post_comments = document.getElementById(post_id + "_post");
+  post_comments.innerHTML="";
+  console.log(post_comments)
+  const currentUid = authService.currentUser.uid;
+  cmtObjList.forEach((cmtObj) => {
+    if(cmtObj.post_id == post_id){
+    const isOwner = currentUid === cmtObj.creatorId;
+    //현재 이메일아디와 댓글아이를 비교해 수정삭제가능하게 하는 부분인듯
+    const temp_html = `<div class="friend_post_top">
+
+                    <div class="img_and_name">
+
+                        <img src="${
+                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                        }">
+
+                             <div class="comment_contents">
+                            <div class="name_and_time">
+                                <span class="friends_name">
+                                ${cmtObj.nickname ?? "닉네임 없음"}
+                            </span>
+                            <span class="time">${new Date(cmtObj.createdAt)
+                              .toString()
+                              .slice(0, 25)}</span>
+                            </div>
+                            <div class="com"><span>${cmtObj.text}</span></div>
+                            <p id="${cmtObj.id}" class="noDisplay">
+                                <input class="newCmtInput">
+                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                            </p>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class=${isOwner ? "menu" : "noDisplay"}>
+
+                      <button onclick="onEditing(event)" class="editBtn mar_10">
+                            <span class="material-symbols-outlined botton_color">
+                                edit
+                            </span>
+                        </button>
+                     <button name="${
+                       cmtObj.id
+                     }" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                            <span class="material-symbols-outlined botton_color">
+                                delete
+                            </span>
+                      </button>
+
+
+
+                    </div>
+
+                </div>
+`;
+    const div = document.createElement("div");
+    div.classList.add("mycards");
+    div.innerHTML = temp_html;
+    post_comments.appendChild(div);
+  }});
+
+
+
+}
+
+export const post_comment_toggle = async (event) => {
+  event.preventDefault();
+  let post_id = event.target.parentNode.parentNode.id
+  let post_comment_box = document.getElementById(post_id + "_post_comment_box");
+  console.log(post_comment_box)
+  post_comment_box.classList.toggle("noDisplay")
+
+}
+
+
+
+export const post_save_comment = async (event) => {
+  event.preventDefault();
+  let post_id = event.target.parentNode.id
+  let post_comment = document.getElementById(post_id + "_post_text");
+  console.log(post_comment)
+
+  const {uid, photoURL, displayName} = authService.currentUser;
+
+  let data = {
+    text: post_comment.value,
+    createdAt: Date.now(),
+    creatorId: uid,
+    profileImg: photoURL,
+    nickname: displayName,
+    Downurl: "",
+    like_count: 0,
+    like_user_list: [],
+    post_id: post_id
+  };
+
+  try {
+    await addDoc(collection(dbService, "comments"), data);
+    post_comment.value = "";
+    // if (path == "main") {
+    //   getCommentList();
+    // } else {
+    //   getCommentList_mypage();
+    // }
+
+  } catch (error) {
+    alert(error);
+    console.log("error in addDoc:", error);
+  }
+
+
+  let cmtObjList = [];
+  const q = query(
+      collection(dbService, "comments"),
+      orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    const commentObj = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    cmtObjList.push(commentObj);
+  });
+
+
+  console.log(post_id)
+  let post_comments = document.getElementById(post_id + "_post");
+  post_comments.innerHTML = "";
+  console.log(post_comments)
+  const currentUid = authService.currentUser.uid;
+  cmtObjList.forEach((cmtObj) => {
+    if (cmtObj.post_id == post_id) {
+      const isOwner = currentUid === cmtObj.creatorId;
+      //현재 이메일아디와 댓글아이를 비교해 수정삭제가능하게 하는 부분인듯
+      const temp_html = `<div class="friend_post_top">
+
+                    <div class="img_and_name">
+
+                        <img src="${
+          cmtObj.profileImg ?? "../assets/blankProfile.webp"
+      }">
+
+                             <div class="comment_contents">
+                            <div class="name_and_time">
+                                <span class="friends_name">
+                                ${cmtObj.nickname ?? "닉네임 없음"}
+                            </span>
+                            <span class="time">${new Date(cmtObj.createdAt)
+          .toString()
+          .slice(0, 25)}</span>
+                            </div>
+                            <div class="com"><span>${cmtObj.text}</span></div>
+                            <p id="${cmtObj.id}" class="noDisplay">
+                                <input class="newCmtInput">
+                                <button class="updateBtn" onclick="update_comment(event)">완료</button>
+                            </p>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class=${isOwner ? "menu" : "noDisplay"}>
+
+                      <button onclick="onEditing(event)" class="editBtn mar_10">
+                            <span class="material-symbols-outlined botton_color">
+                                edit
+                            </span>
+                        </button>
+                     <button name="${
+          cmtObj.id
+      }" onclick="delete_comment(event)" class="deleteBtn mar_5">
+                            <span class="material-symbols-outlined botton_color">
+                                delete
+                            </span>
+                      </button>
+
+
+
+                    </div>
+
+                </div>
+`;
+      const div = document.createElement("div");
+      div.classList.add("mycards");
+      div.innerHTML = temp_html;
+      post_comments.appendChild(div);
+    }
+  });
+
+}
 
 
 

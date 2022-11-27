@@ -11,6 +11,9 @@ import {
   post_onFileChange,
   getSearchResult,
   Like_Button,
+  post_save_comment,
+  post_getCommentList,
+  post_comment_toggle
 } from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
@@ -106,3 +109,6 @@ window.getSearchResult = getSearchResult;
 window.toggleEdit = toggleEdit;
 window.darkBtnclick = darkBtnclick;
 window.Like_Button = Like_Button;
+window.post_save_comment = post_save_comment;
+window.post_getCommentList = post_getCommentList;
+window.post_comment_toggle = post_comment_toggle;

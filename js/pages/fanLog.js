@@ -491,12 +491,14 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                    <div id="post_img" class=${imgemptycheck ? "noDisplay" : ""}>
                    <img src="${cmtObj.Downurl}">
                    </div>
-                 <div class="like_wrap">
+                  <div class="like_comment_wrap">
                    
                     <div class="info">
 
-                    <div class="emoji_img">
-                        <img src="image/like.png">
+                
+
+                        <div class="emoji_img">
+                        <img src="image/heart.png">
 
                         <span class="like_count">${cmtObj.like_count}</span>
                     </div>
@@ -511,19 +513,60 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
                 <hr>
 
                 <div class="like" id="${cmtObj.id}">
-
-                    <div class="like_icon" onclick="Like_Button(event)">
+                  
+                    <div class="like_icon" onclick="Like_Button(event)" >
+                    <i class="fa-regular fa-heart"></i>
+                        <span class="like_button">좋아요</span>
                         
-                        <i class="fa-regular fa-heart"></i>
-
-                        <span class="like_button">Like</span>
                     </div>
 
-<!--                    <div class="like_icon">-->
-<!--                        <i class="fa-solid fa-message"></i>-->
-<!--                        <p>Comments</p>-->
-<!--                    </div>-->
+                
+                 
+                    <div class="like_icon" onclick="post_getCommentList(event), post_comment_toggle(event)">
+                 <i class="fa-solid fa-message"></i>
+                       <p class="message_post">댓글달기</p>
+                 </div>     
+                 
+                    
+                    
 
+ 
+            </div>
+            
+            <hr>
+                <div class="noDisplay" id="${cmtObj.id}_post_comment_box">
+                <div class="comment_warpper" id="${cmtObj.id}">
+
+                <img src="${
+                  cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                }">
+                    <div class="circle"></div>
+
+                    <div class="comment_search">
+
+                        <input placeholder="댓글을 달아주세요." id="${
+                          cmtObj.id
+                        }_post_text">
+                       
+                        
+
+                    </div>
+                    
+                    <span class="material-symbols-outlined" id="comment_send" onclick="post_save_comment(event)">
+                            send
+                        </span>
+                        
+                        
+                </div>
+               
+                <div class="post_comments" id="${cmtObj.id}_post">
+                
+
+                        
+                        
+                        
+                        </div>
+                        
               
 
             </div>

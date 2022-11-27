@@ -434,6 +434,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
     if (cmtObj.creatorId == currentUid && cmtObj.type == "post") {
       const isOwner = currentUid === cmtObj.creatorId;
       const imgemptycheck = cmtObj.Downurl === "";
+      const LikeCheck = cmtObj.like_user_list.includes(currentUid)
       const temp_html = `
                 <div class="friends_post">
 
@@ -514,11 +515,11 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
 
                 <div class="like" id="${cmtObj.id}">
                   
-                    <div class="like_icon" onclick="Like_Button(event)" >
+                    <button class="like_icon" onclick="Like_Button(event)" >
                     <i class="fa-regular fa-heart"></i>
                         <span class="like_button">좋아요</span>
                         
-                    </div>
+                    </button>
 
                 
                  
@@ -767,7 +768,7 @@ export const post_getCommentList = async (event) => {
 
                     </div>
 
-                    <div class=${isOwner ? "menu" : "noDisplay"}>
+                    <div class="noDisplay">
 
                       <button onclick="onEditing(event)" class="editBtn mar_10">
                             <span class="material-symbols-outlined botton_color">
@@ -889,7 +890,7 @@ export const post_save_comment = async (event) => {
 
                     </div>
 
-                    <div class=${isOwner ? "menu" : "noDisplay"} id="${
+                    <div class="noDisplay" id="${
         cmtObj.id
       }">
 

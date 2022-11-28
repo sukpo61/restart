@@ -349,7 +349,7 @@ export const getCommentList = async (searchContent, searchList) => {
                 <div class="comment_warpper" id="${cmtObj.id}">
 
                 <img src="${
-                  cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                  authService.currentUser.photoURL ?? "../assets/blankProfile.webp"
                 }">
                     <div class="circle"></div>
 
@@ -436,7 +436,7 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
     if (cmtObj.creatorId == currentUid && cmtObj.type == "post") {
       const isOwner = currentUid === cmtObj.creatorId;
       const imgemptycheck = cmtObj.Downurl === "";
-      const LikeCheck = cmtObj.like_user_list.includes(currentUid)
+      const like_check = cmtObj.like_user_list.includes(currentUid)
       const temp_html = `
                 <div class="friends_post">
 
@@ -517,11 +517,13 @@ export const getCommentList_mypage = async (searchContent, searchList) => {
 
                 <div class="like" id="${cmtObj.id}">
                   
-                    <button class="like_icon" onclick="Like_Button(event)" >
-                    <i class="fa-regular fa-heart"></i>
+                   <div class="like_icon" onclick="Like_Button(event), like_style_toggle(event)" >
+                        <span class="material-symbols-outlined" id=${like_check ? "heart_color_red" : ""}>
+                         favorite
+                        </span>
                         <span class="like_button">좋아요</span>
                         
-                    </button>
+                    </div>
 
                 
                  

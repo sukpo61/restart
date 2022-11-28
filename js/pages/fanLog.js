@@ -238,7 +238,7 @@ export const getCommentList = async (searchContent, searchList) => {
   // debugger;
   showList.forEach((cmtObj) => {
     if (cmtObj.type == "post") {
-      // debugger;
+      const like_check = cmtObj.like_user_list.includes(currentUid)
       const imgemptycheck = cmtObj.Downurl === "";
       const isOwner = currentUid === cmtObj.creatorId;
       const temp_html = `
@@ -320,11 +320,13 @@ export const getCommentList = async (searchContent, searchList) => {
                 </div>
 
                 <hr>
-
+                    
                 <div class="like" id="${cmtObj.id}">
                   
-                    <div class="like_icon" onclick="Like_Button(event)" >
-                    <i class="fa-regular fa-heart"></i>
+                    <div class="like_icon" onclick="Like_Button(event), like_style_toggle(event)" >
+                        <span class="material-symbols-outlined" id=${like_check ? "heart_color_red" : ""}>
+                         favorite
+                        </span>
                         <span class="like_button">좋아요</span>
                         
                     </div>
@@ -805,6 +807,29 @@ export const post_comment_toggle = async (event) => {
   post_comment_box.classList.toggle("noDisplay");
 };
 
+export const like_icon_toggle = async (event) => {
+  event.preventDefault();
+
+  let post_id = event.target.parentNode.parentNode.id;
+  let post_comment_box = document.getElementById(post_id + "_post_comment_box");
+  console.log(post_comment_box);
+  post_comment_box.classList.toggle("noDisplay");
+};
+
+export const like_style_toggle = async (event) => {
+  event.preventDefault();
+  let id = event.target.id
+  if(id == ""){
+    event.target.id = heart_color_red
+  }else {
+    event.target.id = ""
+  }
+
+}
+
+// ${like_check ? <i class="fa-solid fa-heart"></i> : <i class="fa-regular fa-heart"></i> }
+
+
 export const post_save_comment = async (event) => {
   event.preventDefault();
   let post_id = event.target.parentNode.id;
@@ -857,69 +882,72 @@ export const post_save_comment = async (event) => {
   post_comments.innerHTML = "";
   console.log(post_comments);
   const currentUid = authService.currentUser.uid;
-  cmtObjList.forEach((cmtObj) => {
-    if (cmtObj.post_id == post_id) {
-      const isOwner = currentUid === cmtObj.creatorId;
-      //현재 이메일아디와 댓글아이를 비교해 수정삭제가능하게 하는 부분인듯
-      const temp_html = `<div class="friend_post_top">
 
-                    <div class="img_and_name">
+        // const isOwner = currentUid === cmtObj.creatorId;
 
-                        <img src="${
-                          cmtObj.profileImg ?? "../assets/blankProfile.webp"
-                        }">
+    cmtObjList.forEach((cmtObj) => {
+      if (cmtObj.post_id == post_id) {
 
-                             <div class="comment_contents" id="${cmtObj.id}">
-                            <div class="name_and_time">
-                                <span class="friends_name">
-                                ${cmtObj.nickname ?? "닉네임 없음"}
-                            </span>
-                            <span class="time">${new Date(cmtObj.createdAt)
-                              .toString()
-                              .slice(0, 25)}</span>
-                            </div>
-                            <div class="com"><span>${cmtObj.text}</span></div>
-                            <p id="${cmtObj.id}" class="noDisplay">
-                                <input class="newCmtInput">
-                                <button class="updateBtn" onclick="update_comment(event),post_getCommentList(event)">완료</button>
-                            </p>
-
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="noDisplay" id="${
-        cmtObj.id
-      }">
-
-                      <button onclick="onEditing(event)" class="editBtn mar_10">
-                            <span class="material-symbols-outlined botton_color">
-                                edit
-                            </span>
+        const temp_html = `<div class="friend_post_top">
+  
+                      <div class="img_and_name">
+  
+                          <img src="${
+                            cmtObj.profileImg ?? "../assets/blankProfile.webp"
+                          }">
+  
+                               <div class="comment_contents" id="${cmtObj.id}">
+                              <div class="name_and_time">
+                                  <span class="friends_name">
+                                  ${cmtObj.nickname ?? "닉네임 없음"}
+                              </span>
+                              <span class="time">${new Date(cmtObj.createdAt)
+                                .toString()
+                                .slice(0, 25)}</span>
+                              </div>
+                              <div class="com"><span>${cmtObj.text}</span></div>
+                              <p id="${cmtObj.id}" class="noDisplay">
+                                  <input class="newCmtInput">
+                                  <button class="updateBtn" onclick="update_comment(event),post_getCommentList(event)">완료</button>
+                              </p>
+  
+                          </div>
+  
+  
+  
+                      </div>
+  
+                      <div class="noDisplay" id="${
+          cmtObj.id
+        }">
+  
+                        <button onclick="onEditing(event)" class="editBtn mar_10">
+                              <span class="material-symbols-outlined botton_color">
+                                  edit
+                              </span>
+                          </button>
+                       <button name="${
+                         cmtObj.id
+                       }" onclick="delete_comment(event),post_getCommentList(event)" class="deleteBtn mar_5">
+                              <span class="material-symbols-outlined botton_color">
+                                  delete
+                              </span>
                         </button>
-                     <button name="${
-                       cmtObj.id
-                     }" onclick="delete_comment(event),post_getCommentList(event)" class="deleteBtn mar_5">
-                            <span class="material-symbols-outlined botton_color">
-                                delete
-                            </span>
-                      </button>
+  
+  
+  
+                      </div>
+  
+                  </div>
+  `;
 
-
-
-                    </div>
-
-                </div>
-`;
-      const div = document.createElement("div");
-      div.classList.add("mycards");
-      div.innerHTML = temp_html;
-      post_comments.appendChild(div);
-    }
-  });
-};
+        const div = document.createElement("div");
+        div.classList.add("mycards");
+        div.innerHTML = temp_html;
+        post_comments.appendChild(div);
+      }
+    });
+  };
 
 export const getSearchResult = async (event) => {
   event.preventDefault();
@@ -959,6 +987,9 @@ function toggleMenu() {
   let subMenu = document.getElementById("subMenu");
   subMenu.classList.toggle("open_menu");
 }
+
+
+
 
 window.toggleMenu = toggleMenu;
 window.save_comment = save_comment;

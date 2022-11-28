@@ -233,6 +233,10 @@ p{
 ;
 
 }
+#heart_color_red{
+    color: red;
+}
+
 
 #comment_send{
     margin-left: 10px;

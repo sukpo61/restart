@@ -16,6 +16,7 @@ import {
   post_comment_toggle,
   getCommentList,
   getCommentList_mypage,
+    like_style_toggle,
 } from "./pages/fanLog.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
@@ -109,3 +110,4 @@ window.post_getCommentList = post_getCommentList;
 window.post_comment_toggle = post_comment_toggle;
 window.getCommentList_mypage = getCommentList_mypage;
 window.getCommentList = getCommentList;
+window.like_style_toggle = like_style_toggle;
